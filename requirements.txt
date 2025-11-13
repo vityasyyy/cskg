@@ -1,0 +1,16 @@
+# For scraping RSS feeds and cleaning HTML
+feedparser
+beautifulsoup4
+
+# For building the Knowledge Graph
+rdflib
+
+# For the LLM pipeline
+langchain
+langchain-google-genai
+langchain-openai
+langchain-community
+pydantic
+
+#dotenv
+python-dotenv

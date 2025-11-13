@@ -1,0 +1,260 @@
+[
+  {
+    "title": "Over 46,000 Fake npm Packages Flood Registry in Worm-Like Spam Attack",
+    "link": "https://thehackernews.com/2025/11/over-46000-fake-npm-packages-flood.html",
+    "published": "Thu, 13 Nov 2025 10:28:00 +0530",
+    "content": "Cybersecurity researchers are calling attention to a large-scale spam campaign that has flooded the npm registry with thousands of fake packages since early 2024 as part of a likely financially motivated effort.\n\"The packages were systematically published over an extended period, flooding the npm registry with junk packages that survived in the ecosystem for almost two years,\" Endor Labs"
+  },
+  {
+    "title": "Google Sues China-Based Hackers Behind $1 Billion Lighthouse Phishing Platform",
+    "link": "https://thehackernews.com/2025/11/google-sues-china-based-hackers-behind.html",
+    "published": "Wed, 12 Nov 2025 21:18:00 +0530",
+    "content": "Google has filed a civil lawsuit in the U.S. District Court for the Southern District of New York (SDNY) against China-based hackers who are behind a massive Phishing-as-a-Service (PhaaS) platform called Lighthouse that has ensnared over 1 million users across 120 countries.\nThe PhaaS kit is used to conduct large-scale SMS phishing attacks that exploit trusted brands like E-ZPass and USPS to"
+  },
+  {
+    "title": "Amazon Uncovers Attacks Exploited Cisco ISE and Citrix NetScaler as Zero-Day Flaws",
+    "link": "https://thehackernews.com/2025/11/amazon-uncovers-attacks-exploited-cisco.html",
+    "published": "Wed, 12 Nov 2025 19:30:00 +0530",
+    "content": "Amazon's threat intelligence team on Wednesday disclosed that it observed an advanced threat actor exploiting two then-zero-day security flaws in Cisco Identity Service Engine (ISE) and Citrix NetScaler ADC products as part of attacks designed to deliver custom malware.\n\"This discovery highlights the trend of threat actors focusing on critical identity and network access control infrastructure \u2013"
+  },
+  {
+    "title": "[Webinar] Learn How Leading Security Teams Reduce Attack Surface Exposure with DASR",
+    "link": "https://thehackernews.com/2025/11/webinar-learn-how-leading-security.html",
+    "published": "Wed, 12 Nov 2025 17:25:00 +0530",
+    "content": "Every day, security teams face the same problem\u2014too many risks, too many alerts, and not enough time. You fix one issue, and three more show up. It feels like you\u2019re always one step behind.\nBut what if there was a smarter way to stay ahead\u2014without adding more work or stress?\nJoin The Hacker News and Bitdefender for a free cybersecurity webinar to learn about a new approach called Dynamic Attack"
+  },
+  {
+    "title": "Active Directory Under Siege: Why Critical Infrastructure Needs Stronger Security",
+    "link": "https://thehackernews.com/2025/11/active-directory-under-siege-why.html",
+    "published": "Wed, 12 Nov 2025 16:37:00 +0530",
+    "content": "Active Directory remains the authentication backbone for\u00a0over 90% of Fortune 1000 companies. AD's importance has grown as companies adopt hybrid and cloud infrastructure, but so has its complexity. Every application, user, and device traces back to AD for authentication and authorization, making it the ultimate target. For attackers, it represents the holy grail: compromise Active"
+  },
+  {
+    "title": "Microsoft Fixes 63 Security Flaws, Including a Windows Kernel Zero-Day Under Active Attack",
+    "link": "https://thehackernews.com/2025/11/microsoft-fixes-63-security-flaws.html",
+    "published": "Wed, 12 Nov 2025 15:51:00 +0530",
+    "content": "Microsoft on Tuesday released patches for 63 new security vulnerabilities identified in its software, including one that has come under active exploitation in the wild.\nOf the 63 flaws, four are rated Critical and 59 are rated Important in severity. Twenty-nine of these vulnerabilities are related to privilege escalation, followed by 16 remote code execution, 11 information disclosure, three"
+  },
+  {
+    "title": "Google Launches 'Private AI Compute' \u2014 Secure AI Processing with On-Device-Level Privacy",
+    "link": "https://thehackernews.com/2025/11/google-launches-private-ai-compute.html",
+    "published": "Wed, 12 Nov 2025 14:05:00 +0530",
+    "content": "Google on Tuesday unveiled a new privacy-enhancing technology called Private AI Compute to process artificial intelligence (AI) queries in a secure platform in the cloud.\nThe company said it has built Private AI Compute to \"unlock the full speed and power of Gemini cloud models for AI experiences, while ensuring your personal data stays private to you and is not accessible to anyone else, not"
+  },
+  {
+    "title": "WhatsApp Malware 'Maverick' Hijacks Browser Sessions to Target Brazil's Biggest Banks",
+    "link": "https://thehackernews.com/2025/11/whatsapp-malware-maverick-hijacks.html",
+    "published": "Wed, 12 Nov 2025 00:07:00 +0530",
+    "content": "Threat hunters have uncovered similarities between a banking malware called Coyote and a newly disclosed malicious program dubbed Maverick that has been propagated via WhatsApp.\nAccording to a report from CyberProof, both malware strains are written in .NET, target Brazilian users and banks, and feature identical functionality to decrypt, targeting banking URLs and monitor banking applications."
+  },
+  {
+    "title": "GootLoader Is Back, Using a New Font Trick to Hide Malware on WordPress Sites",
+    "link": "https://thehackernews.com/2025/11/gootloader-is-back-using-new-font-trick.html",
+    "published": "Tue, 11 Nov 2025 21:14:00 +0530",
+    "content": "The malware known as GootLoader has resurfaced yet again after a brief spike in activity earlier this March, according to new findings from Huntress.\nThe cybersecurity company said it observed three GootLoader infections since October 27, 2025, out of which two resulted in hands-on keyboard intrusions with domain controller compromise taking place within 17 hours of initial infection.\n\""
+  },
+  {
+    "title": "CISO's Expert Guide To AI Supply Chain Attacks",
+    "link": "https://thehackernews.com/2025/11/cisos-expert-guide-to-ai-supply-chain.html",
+    "published": "Tue, 11 Nov 2025 17:28:00 +0530",
+    "content": "AI-enabled supply chain attacks jumped 156% last year. Discover why traditional defenses are failing and what CISOs must do now to protect their organizations.\nDownload the full CISO\u2019s expert guide to AI Supply chain attacks here.\u00a0\nTL;DR\n\nAI-enabled supply chain attacks are exploding in scale and sophistication - Malicious package uploads to open-source repositories jumped 156% in"
+  },
+  {
+    "title": "Npm Package Targeting GitHub-Owned Repositories Flagged as Red Team Exercise",
+    "link": "https://thehackernews.com/2025/11/researchers-detect-malicious-npm.html",
+    "published": "Tue, 11 Nov 2025 17:25:00 +0530",
+    "content": "Cybersecurity researchers have discovered a malicious npm package named \"@acitons/artifact\" that typosquats the legitimate \"@actions/artifact\" package with the intent to target GitHub-owned repositories.\n\"We think the intent was to have this script execute during a build of a GitHub-owned repository, exfiltrate the tokens available to the build environment, and then use those tokens to publish"
+  },
+  {
+    "title": "Android Trojan 'Fantasy Hub' Malware Service Turns Telegram Into a Hub for Hackers",
+    "link": "https://thehackernews.com/2025/11/android-trojan-fantasy-hub-malware.html",
+    "published": "Tue, 11 Nov 2025 17:14:00 +0530",
+    "content": "Cybersecurity researchers have disclosed details of a new Android remote access trojan (RAT) called Fantasy Hub that's sold on Russian-speaking Telegram channels under a Malware-as-a-Service (MaaS) model.\nAccording to its seller, the malware enables device control and espionage, allowing threat actors to collect SMS messages, contacts, call logs, images, and videos, as well as intercept, reply,"
+  },
+  {
+    "title": "Hackers Exploiting Triofox Flaw to Install Remote Access Tools via Antivirus Feature",
+    "link": "https://thehackernews.com/2025/11/hackers-exploiting-triofox-flaw-to.html",
+    "published": "Tue, 11 Nov 2025 02:19:00 +0530",
+    "content": "Google's Mandiant Threat Defense on Monday said it discovered n-day exploitation of a now-patched security flaw in Gladinet's Triofox file-sharing and remote access platform.\nThe critical vulnerability, tracked as CVE-2025-12480 (CVSS score: 9.1), allows an attacker to bypass authentication and access the configuration pages, resulting in the upload and execution of arbitrary payloads.\u00a0\nThe"
+  },
+  {
+    "title": "Konni Hackers Turn Google\u2019s Find Hub into a Remote Data-Wiping Weapon",
+    "link": "https://thehackernews.com/2025/11/konni-hackers-turn-googles-find-hub.html",
+    "published": "Tue, 11 Nov 2025 01:59:00 +0530",
+    "content": "The North Korea-affiliated threat actor known as Konni (aka Earth Imp, Opal Sleet, Osmium, TA406, and Vedalia) has been attributed to a new set of attacks targeting both Android and Windows devices for data theft and remote control.\n\"Attackers impersonated psychological counselors and North Korean human rights activists, distributing malware disguised as stress-relief programs,\" the Genians"
+  },
+  {
+    "title": "\u26a1 Weekly Recap: Hyper-V Malware, Malicious AI Bots, RDP Exploits, WhatsApp Lockdown and More",
+    "link": "https://thehackernews.com/2025/11/weekly-recap-hyper-v-malware-malicious.html",
+    "published": "Mon, 10 Nov 2025 18:21:00 +0530",
+    "content": "Cyber threats didn\u2019t slow down last week\u2014and attackers are getting smarter. We\u2019re seeing malware hidden in virtual machines, side-channel leaks exposing AI chats, and spyware quietly targeting Android devices in the wild.\nBut that\u2019s just the surface. From sleeper logic bombs to a fresh alliance between major threat groups, this week\u2019s roundup highlights a clear shift: cybercrime is evolving fast"
+  },
+  {
+    "title": "New Browser Security Report Reveals Emerging Threats for Enterprises",
+    "link": "https://thehackernews.com/2025/11/new-browser-security-report-reveals.html",
+    "published": "Mon, 10 Nov 2025 17:28:06 +0530",
+    "content": "According to the new Browser Security Report 2025, security leaders are discovering that most identity, SaaS, and AI-related risks converge in a single place, the user\u2019s browser. Yet traditional controls like DLP, EDR, and SSE still operate one layer too low.\nWhat\u2019s emerging isn\u2019t just a blindspot. It\u2019s a parallel threat surface: unmanaged extensions acting like supply chain implants, GenAI"
+  },
+  {
+    "title": "Large-Scale ClickFix Phishing Attacks Target Hotel Systems with PureRAT Malware",
+    "link": "https://thehackernews.com/2025/11/large-scale-clickfix-phishing-attacks.html",
+    "published": "Mon, 10 Nov 2025 14:41:00 +0530",
+    "content": "Cybersecurity researchers have called attention to a massive phishing campaign targeting the hospitality industry that lures hotel managers to ClickFix-style pages and harvest their credentials by deploying malware like PureRAT.\n\"The attacker's modus operandi involved using a compromised email account to send malicious messages to multiple hotel establishments,\" Sekoia said. \"This campaign"
+  },
+  {
+    "title": "GlassWorm Malware Discovered in Three VS Code Extensions with Thousands of Installs",
+    "link": "https://thehackernews.com/2025/11/glassworm-malware-discovered-in-three.html",
+    "published": "Mon, 10 Nov 2025 14:21:00 +0530",
+    "content": "Cybersecurity researchers have disclosed a new set of three extensions associated with the GlassWorm campaign, indicating continued attempts on part of threat actors to target the Visual Studio Code (VS Code) ecosystem.\nThe extensions in question, which are still available for download, are listed below -\n\nai-driven-dev.ai-driven-dev (3,402 downloads)\nadhamu.history-in-sublime-merge (4,057"
+  },
+  {
+    "title": "Microsoft Uncovers 'Whisper Leak' Attack That Identifies AI Chat Topics in Encrypted Traffic",
+    "link": "https://thehackernews.com/2025/11/microsoft-uncovers-whisper-leak-attack.html",
+    "published": "Sat, 08 Nov 2025 19:59:00 +0530",
+    "content": "Microsoft has disclosed details of a novel side-channel attack targeting remote language models that could enable a passive adversary with capabilities to observe network traffic to glean details about model\u202fconversation\u202ftopics despite encryption protections under certain circumstances.\nThis leakage of data exchanged between humans and\u202fstreaming-mode language models could pose serious risks to"
+  },
+  {
+    "title": "Samsung Mobile Flaw Exploited as Zero-Day to Deploy LANDFALL Android Spyware",
+    "link": "https://thehackernews.com/2025/11/samsung-zero-click-flaw-exploited-to.html",
+    "published": "Fri, 07 Nov 2025 23:30:00 +0530",
+    "content": "A now-patched security flaw in Samsung Galaxy Android devices was exploited as a zero-day to deliver a \"commercial-grade\" Android spyware dubbed LANDFALL in targeted attacks in the Middle East.\nThe activity involved the exploitation of CVE-2025-21042 (CVSS score: 8.8), an out-of-bounds write flaw in the \"libimagecodec.quram.so\" component that could allow remote attackers to execute arbitrary"
+  },
+  {
+    "title": "From Log4j to IIS, China\u2019s Hackers Turn Legacy Bugs into Global Espionage Tools",
+    "link": "https://thehackernews.com/2025/11/from-log4j-to-iis-chinas-hackers-turn.html",
+    "published": "Fri, 07 Nov 2025 21:37:00 +0530",
+    "content": "A China-linked threat actor has been attributed to a cyber attack targeting an U.S. non-profit organization with an aim to establish long-term persistence, as part of broader activity aimed at U.S. entities that are linked to or involved in policy issues.\nThe organization, according to a report from Broadcom's Symantec and Carbon Black teams, is \"active in attempting to influence U.S. government"
+  },
+  {
+    "title": "Hidden Logic Bombs in Malware-Laced NuGet Packages Set to Detonate Years After Installation",
+    "link": "https://thehackernews.com/2025/11/hidden-logic-bombs-in-malware-laced.html",
+    "published": "Fri, 07 Nov 2025 17:25:00 +0530",
+    "content": "A set of nine malicious NuGet packages has been identified as capable of dropping time-delayed payloads to sabotage database operations and corrupt industrial control systems.\nAccording to software supply chain security company Socket, the packages were published in 2023 and 2024 by a user named \"shanhai666\" and are designed to run malicious code after specific trigger dates in August 2027 and"
+  },
+  {
+    "title": "Enterprise Credentials at Risk \u2013 Same Old, Same Old?",
+    "link": "https://thehackernews.com/2025/11/enterprise-credentials-at-risk-same-old.html",
+    "published": "Fri, 07 Nov 2025 16:00:00 +0530",
+    "content": "Imagine this: Sarah from accounting gets what looks like a routine password reset email from your organization\u2019s cloud provider. She clicks the link, types in her credentials, and goes back to her spreadsheet. But unknown to her, she\u2019s just made a big mistake. Sarah just accidentally handed over her login details to cybercriminals who are laughing all the way to their dark web"
+  },
+  {
+    "title": "Google Launches New Maps Feature to Help Businesses Report Review-Based Extortion Attempts",
+    "link": "https://thehackernews.com/2025/11/google-launches-new-maps-feature-to.html",
+    "published": "Fri, 07 Nov 2025 14:45:00 +0530",
+    "content": "Google on Thursday said it's rolling out a dedicated form to allow businesses listed on Google Maps to report extortion attempts made by threat actors who post inauthentic bad reviews on the platform and demand ransoms to remove the negative comments.\nThe approach is designed to tackle a common practice called review bombing, where online users intentionally post negative user reviews in an"
+  },
+  {
+    "title": "Vibe-Coded Malicious VS Code Extension Found with Built-In Ransomware Capabilities",
+    "link": "https://thehackernews.com/2025/11/vibe-coded-malicious-vs-code-extension.html",
+    "published": "Fri, 07 Nov 2025 12:18:00 +0530",
+    "content": "Cybersecurity researchers have flagged a malicious Visual Studio Code (VS Code) extension with basic ransomware capabilities that appears to be created with the help of artificial intelligence \u2013 in other words, vibe-coded.\nSecure Annex researcher John Tuckner, who flagged the extension \"susvsex,\" said it does not attempt to hide its malicious functionality. The extension was uploaded on"
+  },
+  {
+    "title": "Trojanized ESET Installers Drop Kalambur Backdoor in Phishing Attacks on Ukraine",
+    "link": "https://thehackernews.com/2025/11/trojanized-eset-installers-drop.html",
+    "published": "Thu, 06 Nov 2025 21:01:00 +0530",
+    "content": "A previously unknown threat activity cluster has been observed impersonating Slovak cybersecurity company ESET as part of phishing attacks targeting Ukrainian entities.\nThe campaign, detected in May 2025, is tracked by the security outfit under the moniker InedibleOchotense, describing it as Russia-aligned.\n\"InedibleOchotense sent spear-phishing emails and Signal text messages, containing a link"
+  },
+  {
+    "title": "Cisco Warns of New Firewall Attack Exploiting CVE-2025-20333 and CVE-2025-20362",
+    "link": "https://thehackernews.com/2025/11/cisco-warns-of-new-firewall-attack.html",
+    "published": "Thu, 06 Nov 2025 20:28:00 +0530",
+    "content": "Cisco on Wednesday disclosed that it became aware of a new attack variant that's designed to target devices running Cisco Secure Firewall Adaptive Security Appliance (ASA) Software and Cisco Secure Firewall Threat Defense (FTD) Software releases that are susceptible to CVE-2025-20333 and CVE-2025-20362.\n\"This attack can cause unpatched devices to unexpectedly reload, leading to denial-of-service"
+  },
+  {
+    "title": "From Tabletop to Turnkey: Building Cyber Resilience in Financial Services",
+    "link": "https://thehackernews.com/2025/11/from-tabletop-to-turnkey-building-cyber.html",
+    "published": "Thu, 06 Nov 2025 17:29:00 +0530",
+    "content": "Introduction\nFinancial institutions are facing a new reality: cyber-resilience has passed from being a best practice, to an operational necessity, to a prescriptive regulatory requirement.\nCrisis management or Tabletop exercises, for a long time relatively rare in the context of cybersecurity, have become required as a series of regulations has introduced this requirement to FSI organizations in"
+  },
+  {
+    "title": "ThreatsDay Bulletin: AI Tools in Malware, Botnets, GDI Flaws, Election Attacks & More",
+    "link": "https://thehackernews.com/2025/11/threatsday-bulletin-ai-tools-in-malware.html",
+    "published": "Thu, 06 Nov 2025 17:10:00 +0530",
+    "content": "Cybercrime has stopped being a problem of just the internet \u2014 it\u2019s becoming a problem of the real world. Online scams now fund organized crime, hackers rent violence like a service, and even trusted apps or social platforms are turning into attack vectors.\nThe result is a global system where every digital weakness can be turned into physical harm, economic loss, or political leverage."
+  },
+  {
+    "title": "Bitdefender Named a Representative Vendor in the 2025 Gartner\u00ae Market Guide for Managed Detection and Response",
+    "link": "https://thehackernews.com/2025/11/bitdefender-named-representative-vendor.html",
+    "published": "Thu, 06 Nov 2025 16:13:00 +0530",
+    "content": "Bitdefender has once again been recognized as a Representative Vendor in the Gartner\u00ae Market Guide for Managed Detection and Response (MDR) \u2014 marking the fourth consecutive year of inclusion. According to Gartner, more than 600 providers globally claim to deliver MDR services, yet only a select few meet the criteria to appear in the Market Guide. While inclusion is not a ranking or comparative"
+  },
+  {
+    "title": "Google sues to dismantle Chinese phishing platform behind US toll scams",
+    "link": "https://www.bleepingcomputer.com/news/security/google-sues-to-dismantle-chinese-phishing-platform-behind-us-toll-scams/",
+    "published": "Wed, 12 Nov 2025 15:59:44 -0500",
+    "content": "Google has filed a lawsuit to dismantle the \"Lighthouse\" phishing-as-a-service platform used by cybercriminals worldwide to steal credit card information through SMS phishing attacks impersonating the U.S. Postal Service and E-ZPass toll systems. [...]"
+  },
+  {
+    "title": "Windows 11 now supports 3rd-party apps for native passkey management",
+    "link": "https://www.bleepingcomputer.com/news/security/windows-11-now-supports-3rd-party-apps-for-native-passkey-management/",
+    "published": "Wed, 12 Nov 2025 13:18:11 -0500",
+    "content": "Microsoft announced that passwordless authentication is now easier on Windows 11 through native support for third-party passkey managers, the first ones supported being\u00a01Password and Bitwarden. [...]"
+  },
+  {
+    "title": "DanaBot malware is back to infecting Windows after 6-month break",
+    "link": "https://www.bleepingcomputer.com/news/security/danabot-malware-is-back-to-infecting-windows-after-6-month-break/",
+    "published": "Wed, 12 Nov 2025 11:34:54 -0500",
+    "content": "The DanaBot malware has returned with a new version observed in attacks, six-months after law enforcement's Operation Endgame disrupted its activity in May. [...]"
+  },
+  {
+    "title": "Microsoft fixes bug causing false Windows 10 end-of-support alerts",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bug-causing-false-windows-10-end-of-support-alerts/",
+    "published": "Wed, 12 Nov 2025 10:29:13 -0500",
+    "content": "Microsoft has resolved a bug causing incorrect Windows 10 end-of-support warnings on systems with active security coverage or still under active support after installing the October 2025 updates. [...]"
+  },
+  {
+    "title": "Extending Zero Trust to AI Agents: \u201cNever Trust, Always Verify\u201d Goes Autonomous",
+    "link": "https://www.bleepingcomputer.com/news/security/extending-zero-trust-to-ai-agents-never-trust-always-verify-goes-autonomous/",
+    "published": "Wed, 12 Nov 2025 10:25:35 -0500",
+    "content": "As AI agents gain autonomy to act, decide, and access data, traditional Zero Trust models fall short. Token Security explains how to extend \"never trust, always verify\" to agentic AI with scoped access, continuous monitoring, and human accountability. [...]"
+  },
+  {
+    "title": "New UK laws to strengthen critical infrastructure cyber defenses",
+    "link": "https://www.bleepingcomputer.com/news/security/new-uk-laws-to-strengthen-critical-infrastructure-cyber-defenses/",
+    "published": "Wed, 12 Nov 2025 09:08:54 -0500",
+    "content": "The United Kingdom has introduced new legislation to boost cybersecurity defenses for hospitals, energy systems, water supplies, and transport networks against cyberattacks, linked to annual damages of nearly \u00a315 billion ($19.6 billion). [...]"
+  },
+  {
+    "title": "Hackers exploited Citrix, Cisco ISE flaws in zero-day attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-exploited-citrix-cisco-ise-flaws-in-zero-day-attacks/",
+    "published": "Wed, 12 Nov 2025 09:00:00 -0500",
+    "content": "An advanced threat actor exploited the critical vulnerabilities \"Citrix Bleed 2\" (CVE-2025-5777) in NetScaler ADC and Gateway, and\u00a0CVE-2025-20337 affecting\u00a0Cisco Identity Service Engine (ISE) as zero-days to deploy custom malware. [...]"
+  },
+  {
+    "title": "Synnovis notifies of data breach after 2024 ransomware attack",
+    "link": "https://www.bleepingcomputer.com/news/security/synnovis-notifies-of-data-breach-after-2024-ransomware-attack/",
+    "published": "Wed, 12 Nov 2025 07:28:42 -0500",
+    "content": "Synnovis, a leading UK pathology services provider, is notifying healthcare providers that a data breach occurred following a ransomware attack in June 2024, which resulted\u00a0in the theft of some patients' data. [...]"
+  },
+  {
+    "title": "Microsoft fixes Windows Task Manager bug affecting performance",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-windows-task-manager-bug-affecting-performance/",
+    "published": "Wed, 12 Nov 2025 05:42:34 -0500",
+    "content": "Microsoft has resolved a known issue preventing users from quitting the Windows 11 Task Manager after installing the optional Windows 11 KB5067036 update. [...]"
+  },
+  {
+    "title": "Rhadamanthys infostealer disrupted as cybercriminals lose server access",
+    "link": "https://www.bleepingcomputer.com/news/security/rhadamanthys-infostealer-disrupted-as-cybercriminals-lose-server-access/",
+    "published": "Tue, 11 Nov 2025 19:14:19 -0500",
+    "content": "The Rhadamanthys infostealer operation has been disrupted, with numerous \"customers\" of the malware-as-a-service reporting that they no longer have access to their servers. [...]"
+  },
+  {
+    "title": "Synology fixes BeeStation zero-days demoed at Pwn2Own Ireland",
+    "link": "https://www.bleepingcomputer.com/news/security/synology-fixes-beestation-zero-days-demoed-at-pwn2own-ireland/",
+    "published": "Tue, 11 Nov 2025 17:34:46 -0500",
+    "content": "Synology has addressed a critical-severity remote code execution (RCE) vulnerability in BeeStation products that was demonstrated at the recent Pwn2Own hacking competition. [...]"
+  },
+  {
+    "title": "Hackers abuse Triofox antivirus feature to deploy remote access tools",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-abuse-triofox-antivirus-feature-to-deploy-remote-access-tools/",
+    "published": "Tue, 11 Nov 2025 15:01:59 -0500",
+    "content": "Hackers exploited a critical vulnerability and the built-in antivirus feature in Gladinet's Triofox file-sharing and remote-access platform to achieve remote code execution with SYSTEM privileges. [...]"
+  },
+  {
+    "title": "Microsoft: Windows 11 23H2 Home and Pro reach end of support",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-11-23h2-home-and-pro-reach-end-of-support/",
+    "published": "Tue, 11 Nov 2025 14:12:17 -0500",
+    "content": "Microsoft has reminded customers today that systems running Home and Pro editions of Windows 11 23H2 have stopped receiving security updates. [...]"
+  }
+]

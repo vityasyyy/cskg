@@ -1,0 +1,672 @@
+@prefix cskg: <http://group2.org/cskg/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix stix: <http://docs.oasis-open.org/cti/ns/stix#> .
+
+cskg:Active_Directory cskg:is_auth_for cskg:over_90%_of_Fortune_1000_companies ;
+    cskg:is_target_for cskg:attackers .
+
+cskg:Attackers cskg:distributed cskg:malware_disguised_as_stress-relief_programs ;
+    cskg:impersonated cskg:psychological_counselors_and_North_Korean_human_rights_activists .
+
+cskg:Bitdefender cskg:included_in cskg:Gartner_Market_Guide ;
+    cskg:recognized_as <http://group2.org/cskg/Representative_Vendor_in_the_Gartner®_Market_Guide_for_Managed_Detection_and_Response_(MDR)> .
+
+<http://group2.org/cskg/Broadcom's_Symantec_and_Carbon_Black_teams> cskg:reported cskg:cyber_attack_by_China-linked_threat_actor_on_US_non-profit_organization .
+
+cskg:Browser cskg:converges <http://group2.org/cskg/Identity_risks,_SaaS_risks,_AI-related_risks> .
+
+cskg:CVE-2025-12480 cskg:is_a_vulnerability_of <http://group2.org/cskg/Gladinet's_Triofox_file-sharing_and_remote_access_platform> .
+
+cskg:CVE-2025-21042 cskg:is_exploited_by cskg:remote_attackers .
+
+cskg:Cisco_Secure_Firewall_Adaptive_Security_Appliance_\(ASA\)_Software_and_Cisco_Secure_Firewall_Threat_Defense_\(FTD\)_Software_releases cskg:are_susceptible_to cskg:CVE-2025-20333_and_CVE-2025-20362 .
+
+cskg:Cybercriminals cskg:steal cskg:credit_card_information ;
+    cskg:use cskg:Lighthouse_phishing-as-a-service_platform .
+
+cskg:DanaBot_malware cskg:observed_in cskg:attacks ;
+    cskg:returned_with cskg:new_version .
+
+cskg:Gartner cskg:rates cskg:Managed_Detection_and_Response_\(MDR\)_services_providers .
+
+cskg:Google cskg:has_filed_a_lawsuit_against cskg:Lighthouse_phishing-as-a-service_platform ;
+    cskg:introduces cskg:dedicated_form_for_businesses_to_report_extortion_attempts ;
+    cskg:unveiled cskg:Private_AI_Compute .
+
+cskg:Hackers cskg:achieved cskg:remote_code_execution_with_SYSTEM_privileges ;
+    cskg:exploited <http://group2.org/cskg/critical_vulnerability_in_Gladinet's_Triofox_file-sharing_and_remote-access_platform> ;
+    cskg:used cskg:the_built-in_antivirus_feature_in_Triofox .
+
+<http://group2.org/cskg/Law_enforcement's_Operation_Endgame> cskg:disrupted cskg:DanaBot_malware_activity .
+
+cskg:Microsoft cskg:announced cskg:passwordless_authentication_on_Windows_11 ;
+    cskg:has_resolved cskg:a_bug_causing_incorrect_Windows_10_end-of-support_warnings ;
+    cskg:patched cskg:63_new_security_vulnerabilities ;
+    cskg:reminded cskg:customers ;
+    cskg:resolved cskg:known_issue_preventing_users_from_quitting_the_Windows_11_Task_Manager .
+
+cskg:Rhadamanthys_infostealer_operation cskg:disrupted <http://group2.org/cskg/malware-as-a-service_customers'_access_to_their_servers> .
+
+cskg:Samsung_Galaxy_Android_device cskg:was_exploited_by cskg:zero-day .
+
+cskg:Sarah_from_accounting cskg:victimized_by cskg:cybercriminals .
+
+cskg:Synnovis cskg:experienced cskg:data_breach ;
+    cskg:was_targeted_by cskg:ransomware_attack .
+
+cskg:Synology cskg:has_addressed cskg:a_critical-severity_remote_code_execution_\(RCE\)_vulnerability_in_BeeStation_products .
+
+cskg:The_North_Korea-affiliated_threat_actor_known_as_Konni cskg:has_been_attributed_to cskg:a_new_set_of_attacks_targeting_both_Android_and_Windows_devices_for_data_theft_and_remote_control .
+
+cskg:The_vulnerability cskg:is_in cskg:BeeStation_products ;
+    cskg:was_demonstrated_at cskg:the_recent_Pwn2Own_hacking_competition .
+
+cskg:Third-party_passkey_managers cskg:include cskg:1Password_and_Bitwarden .
+
+cskg:Those_vulnerabilities cskg:included cskg:information_disclosure,
+        cskg:privilege_escalation,
+        cskg:remote_code_execution .
+
+cskg:Token_Security cskg:explains_how_to_extend <http://group2.org/cskg/'never_trust,_always_verify'_to_agentic_AI> .
+
+cskg:Unknown_actors cskg:publishes cskg:fake_packages ;
+    cskg:uses cskg:large-scale_spam_campaign .
+
+cskg:Windows_11 cskg:supports cskg:third-party_passkey_managers .
+
+cskg:Zero-day cskg:delivered cskg:LANDFALL .
+
+cskg:agentic_AI cskg:associated_with <http://group2.org/cskg/scoped_access,_continuous_monitoring,_and_human_accountability> .
+
+cskg:attacker cskg:deploys cskg:PureRAT ;
+    cskg:targets cskg:hotel_managers ;
+    cskg:uses cskg:compromised_email_account .
+
+cskg:security_leaders cskg:discovering cskg:risks .
+
+cskg:systems cskg:running cskg:Home_and_Pro_editions_of_Windows_11_23H2 .
+
+cskg:threat_actors cskg:demand cskg:ransoms_to_remove_negative_comments ;
+    cskg:post cskg:inauthentic_bad_reviews ;
+    cskg:target cskg:Visual_Studio_Code_\(VS_Code\)_ecosystem ;
+    cskg:use cskg:adhamuhistory-in-sublime-merge,
+        cskg:ai-driven-devai-driven-dev .
+
+cskg:unpatched_devices cskg:can_cause cskg:denial-of-service .
+
+<https://thehackernews.com/2025/11/active-directory-under-siege-why.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/amazon-uncovers-attacks-exploited-cisco.html> a stix:Report ;
+    stix:mentions <http://group2.org/cskg/Amazon's_threat_intelligence_team>,
+        cskg:Cisco_Identity_Service_Engine_\(ISE\),
+        cskg:Citrix_NetScaler_ADC,
+        cskg:custom_malware,
+        cskg:exploiting,
+        cskg:two_then-zero-day_security_flaws .
+
+<https://thehackernews.com/2025/11/android-trojan-fantasy-hub-malware.html> a stix:Report ;
+    stix:mentions cskg:Android_remote_access_trojan_\(RAT\),
+        cskg:Fantasy_Hub,
+        cskg:device_control,
+        cskg:espionage .
+
+<https://thehackernews.com/2025/11/bitdefender-named-representative-vendor.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/cisco-warns-of-new-firewall-attack.html> a stix:Report ;
+    stix:mentions cskg:denial-of-service,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-20333>,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-20362> .
+
+<https://thehackernews.com/2025/11/cisos-expert-guide-to-ai-supply-chain.html> a stix:Report ;
+    stix:mentions cskg:AI-enabled_supply_chain_attacks .
+
+<https://thehackernews.com/2025/11/enterprise-credentials-at-risk-same-old.html> a stix:Report ;
+    stix:mentions cskg:Phishing,
+        cskg:cybercriminals .
+
+<https://thehackernews.com/2025/11/from-log4j-to-iis-chinas-hackers-turn.html> a stix:Report ;
+    stix:mentions cskg:China-linked_threat_actor,
+        cskg:long-term_persistence .
+
+<https://thehackernews.com/2025/11/glassworm-malware-discovered-in-three.html> a stix:Report ;
+    stix:mentions cskg:GlassWorm_campaign,
+        cskg:adhamuhistory-in-sublime-merge,
+        cskg:ai-driven-devai-driven-dev .
+
+<https://thehackernews.com/2025/11/google-launches-new-maps-feature-to.html> a stix:Report ;
+    stix:mentions cskg:review_bombing .
+
+<https://thehackernews.com/2025/11/google-launches-private-ai-compute.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/google-sues-china-based-hackers-behind.html> a stix:Report ;
+    stix:mentions cskg:China-based_hackers,
+        cskg:Lighthouse,
+        cskg:Phishing-as-a-Service_\(PhaaS\),
+        cskg:Phishing-as-a-Service_\(PhaaS\)_platform,
+        cskg:SMS_phishing_attacks,
+        cskg:exploit_trusted_brands_like_E-ZPass_and_USPS,
+        cskg:large-scale_SMS_phishing_attacks .
+
+<https://thehackernews.com/2025/11/gootloader-is-back-using-new-font-trick.html> a stix:Report ;
+    stix:mentions cskg:GootLoader,
+        cskg:domain_controller_compromise,
+        cskg:hands-on_keyboard_intrusions .
+
+<https://thehackernews.com/2025/11/hackers-exploiting-triofox-flaw-to.html> a stix:Report ;
+    stix:mentions cskg:bypass_authentication,
+        cskg:n-day_exploitation,
+        cskg:upload_and_execution_of_arbitrary_payloads,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-12480> .
+
+<https://thehackernews.com/2025/11/hidden-logic-bombs-in-malware-laced.html> a stix:Report ;
+    stix:mentions cskg:NuGet_packages,
+        cskg:corrupt_industrial_control_systems,
+        cskg:sabotage_database_operations,
+        cskg:shanhai666,
+        cskg:time-delayed_payloads .
+
+<https://thehackernews.com/2025/11/konni-hackers-turn-googles-find-hub.html> a stix:Report ;
+    stix:mentions cskg:Earth_Imp,
+        cskg:Konni,
+        cskg:Opal_Sleet,
+        cskg:Osmium,
+        cskg:TA406,
+        cskg:Vedalia,
+        cskg:data_theft,
+        cskg:malware_disguised_as_stress-relief_programs,
+        cskg:remote_control .
+
+<https://thehackernews.com/2025/11/large-scale-clickfix-phishing-attacks.html> a stix:Report ;
+    stix:mentions cskg:ClickFix-style_pages,
+        cskg:PureRAT,
+        cskg:compromised_email_account,
+        cskg:phishing .
+
+<https://thehackernews.com/2025/11/microsoft-fixes-63-security-flaws.html> a stix:Report ;
+    stix:mentions cskg:63_new_security_vulnerabilities,
+        cskg:information_disclosure,
+        cskg:privilege_escalation,
+        cskg:remote_code_execution .
+
+<https://thehackernews.com/2025/11/microsoft-uncovers-whisper-leak-attack.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/new-browser-security-report-reveals.html> a stix:Report ;
+    stix:mentions cskg:Browser_Security_Report_2025,
+        cskg:supply_chain_implants,
+        cskg:unmanaged_extensions .
+
+<https://thehackernews.com/2025/11/over-46000-fake-npm-packages-flood.html> a stix:Report ;
+    stix:mentions cskg:fake_packages,
+        cskg:large-scale_spam_campaign,
+        cskg:npm_registry,
+        cskg:spamming .
+
+<https://thehackernews.com/2025/11/researchers-detect-malicious-npm.html> a stix:Report ;
+    stix:mentions <http://group2.org/cskg/@acitonsartifact>,
+        cskg:data_exfiltration,
+        cskg:npm_package,
+        cskg:typosquatting .
+
+<https://thehackernews.com/2025/11/samsung-zero-click-flaw-exploited-to.html> a stix:Report ;
+    stix:mentions cskg:LANDFALL,
+        cskg:Zero-day_exploit,
+        cskg:libimagecodecquramso,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-21042> .
+
+<https://thehackernews.com/2025/11/threatsday-bulletin-ai-tools-in-malware.html> a stix:Report ;
+    stix:mentions cskg:Online_scams,
+        cskg:Service_rental_for_violence,
+        cskg:Using_trusted_apps_or_social_platforms_as_attack_vectors .
+
+<https://thehackernews.com/2025/11/trojanized-eset-installers-drop.html> a stix:Report ;
+    stix:mentions cskg:InedibleOchotense,
+        cskg:Phishing .
+
+<https://thehackernews.com/2025/11/vibe-coded-malicious-vs-code-extension.html> a stix:Report ;
+    stix:mentions cskg:Visual_Studio_Code_\(VS_Code\)_extension_with_basic_ransomware_capabilities,
+        cskg:susvsex .
+
+<https://thehackernews.com/2025/11/webinar-learn-how-leading-security.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/weekly-recap-hyper-v-malware-malicious.html> a stix:Report .
+
+<https://thehackernews.com/2025/11/whatsapp-malware-maverick-hijacks.html> a stix:Report ;
+    stix:mentions cskg:Coyote,
+        cskg:Decrypt,
+        cskg:Maverick,
+        cskg:Monitoring_banking_applications,
+        cskg:Targeting_banking_URLs .
+
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bug-causing-false-windows-10-end-of-support-alerts/> a stix:Report .
+
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-windows-task-manager-bug-affecting-performance/> a stix:Report ;
+    stix:mentions cskg:Installing_updates,
+        cskg:Windows_11_KB5067036_update,
+        cskg:Windows_11_Task_Manager,
+        cskg:known_issue_preventing_users_from_quitting .
+
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-11-23h2-home-and-pro-reach-end-of-support/> a stix:Report .
+
+<https://www.bleepingcomputer.com/news/security/danabot-malware-is-back-to-infecting-windows-after-6-month-break/> a stix:Report ;
+    stix:mentions cskg:DanaBot,
+        cskg:attacks .
+
+<https://www.bleepingcomputer.com/news/security/extending-zero-trust-to-ai-agents-never-trust-always-verify-goes-autonomous/> a stix:Report ;
+    stix:mentions cskg:AI_agents,
+        cskg:Zero_Trust_models,
+        cskg:continuous_monitoring,
+        cskg:human_accountability,
+        cskg:scoped_access .
+
+<https://www.bleepingcomputer.com/news/security/google-sues-to-dismantle-chinese-phishing-platform-behind-us-toll-scams/> a stix:Report ;
+    stix:mentions cskg:Phishing,
+        cskg:SMS_phishing .
+
+<https://www.bleepingcomputer.com/news/security/hackers-abuse-triofox-antivirus-feature-to-deploy-remote-access-tools/> a stix:Report ;
+    stix:mentions <http://group2.org/cskg/critical_vulnerability_in_Gladinet's_Triofox_file-sharing_and_remote-access_platform>,
+        cskg:remote_code_execution .
+
+<https://www.bleepingcomputer.com/news/security/hackers-exploited-citrix-cisco-ise-flaws-in-zero-day-attacks/> a stix:Report ;
+    stix:mentions cskg:Citrix_Bleed_2,
+        cskg:advanced_threat_actor,
+        cskg:custom_malware,
+        cskg:exploiting_zero-day_vulnerabilities,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-20337>,
+        <https://w3id.org/sepses/resource/cve/CVE-2025-5777> .
+
+<https://www.bleepingcomputer.com/news/security/new-uk-laws-to-strengthen-critical-infrastructure-cyber-defenses/> a stix:Report .
+
+<https://www.bleepingcomputer.com/news/security/rhadamanthys-infostealer-disrupted-as-cybercriminals-lose-server-access/> a stix:Report ;
+    stix:mentions cskg:Rhadamanthys_infostealer .
+
+<https://www.bleepingcomputer.com/news/security/synnovis-notifies-of-data-breach-after-2024-ransomware-attack/> a stix:Report ;
+    stix:mentions cskg:data_breach,
+        cskg:ransomware,
+        cskg:ransomware_attack .
+
+<https://www.bleepingcomputer.com/news/security/synology-fixes-beestation-zero-days-demoed-at-pwn2own-ireland/> a stix:Report ;
+    stix:mentions cskg:a_critical-severity_remote_code_execution_\(RCE\)_vulnerability_in_BeeStation_products .
+
+<https://www.bleepingcomputer.com/news/security/windows-11-now-supports-3rd-party-apps-for-native-passkey-management/> a stix:Report .
+
+<http://group2.org/cskg/@acitonsartifact> a stix:Malware ;
+    rdfs:label "@acitons/artifact" ;
+    cskg:targets cskg:GitHub-owned_repositories ;
+    cskg:typosquats <http://group2.org/cskg/@actionsartifact> .
+
+cskg:AI-enabled_supply_chain_attacks a stix:AttackPattern ;
+    rdfs:label "AI-enabled supply chain attacks" .
+
+cskg:AI_agents a stix:AttackPattern ;
+    rdfs:label "AI agents" ;
+    cskg:gain_autonomy <http://group2.org/cskg/act,_decide,_and_access_data> .
+
+<http://group2.org/cskg/Amazon's_threat_intelligence_team> a stix:ThreatActor ;
+    rdfs:label "Amazon's threat intelligence team" ;
+    cskg:observed cskg:an_advanced_threat_actor .
+
+cskg:Android_remote_access_trojan_\(RAT\) a stix:Malware ;
+    rdfs:label "Android remote access trojan (RAT)" .
+
+cskg:Browser_Security_Report_2025 a stix:Indicator ;
+    rdfs:label "Browser Security Report 2025" .
+
+cskg:CVE-2025-20337 cskg:affecting cskg:Cisco_Identity_Service_Engine .
+
+cskg:CVE-2025-5777 cskg:in cskg:NetScaler_ADC_and_Gateway .
+
+cskg:China-based_hackers a stix:ThreatActor ;
+    rdfs:label "China-based hackers" ;
+    cskg:uses cskg:Lighthouse .
+
+cskg:Cisco_Identity_Service_Engine_\(ISE\) a stix:Indicator ;
+    rdfs:label "Cisco Identity Service Engine (ISE)" .
+
+cskg:Citrix_NetScaler_ADC a stix:Indicator ;
+    rdfs:label "Citrix NetScaler ADC" .
+
+cskg:ClickFix-style_pages a stix:Indicator ;
+    rdfs:label "ClickFix-style pages" .
+
+cskg:Coyote a stix:Malware ;
+    rdfs:label "Coyote" ;
+    cskg:has_similarities_with cskg:Maverick ;
+    cskg:targets cskg:Brazilian_users_and_banks .
+
+cskg:DanaBot a stix:Malware ;
+    rdfs:label "DanaBot" .
+
+cskg:Decrypt a stix:AttackPattern ;
+    rdfs:label "Decrypt" .
+
+cskg:Earth_Imp a stix:ThreatActor ;
+    rdfs:label "Earth Imp" .
+
+cskg:Fantasy_Hub a stix:Malware ;
+    rdfs:label "Fantasy Hub" ;
+    cskg:allows <http://group2.org/cskg/threat_actors_to_collect_SMS_messages,_contacts,_call_logs,_images,_and_videos> ;
+    cskg:enables cskg:device_control_and_espionage ;
+    cskg:sold_on cskg:Russian-speaking_Telegram_channels .
+
+cskg:GlassWorm_campaign a stix:AttackPattern ;
+    rdfs:label "GlassWorm campaign" .
+
+cskg:GootLoader a stix:Malware ;
+    rdfs:label "GootLoader" ;
+    cskg:observed cskg:Huntress .
+
+cskg:GootLoader_infections cskg:resulted_in cskg:hands-on_keyboard_intrusions_and_domain_controller_compromise .
+
+cskg:Home_and_Pro_editions_of_Windows_11_23H2 cskg:have_stopped_receiving cskg:security_updates .
+
+cskg:Huntress cskg:reported cskg:GootLoader_infections .
+
+cskg:InedibleOchotense a stix:ThreatActor ;
+    rdfs:label "InedibleOchotense" ;
+    cskg:aligned_with cskg:Russia ;
+    cskg:impersonates cskg:ESET ;
+    cskg:targets cskg:Ukrainian_entities ;
+    cskg:uses cskg:Signal_text_messages,
+        cskg:spear-phishing_emails .
+
+cskg:Installing_updates a stix:AttackPattern ;
+    rdfs:label "Installing updates" .
+
+cskg:Konni a stix:ThreatActor ;
+    rdfs:label "Konni" .
+
+cskg:Monitoring_banking_applications a stix:AttackPattern ;
+    rdfs:label "Monitoring banking applications" .
+
+cskg:Online_scams a stix:AttackPattern ;
+    rdfs:label "Online scams" .
+
+cskg:Opal_Sleet a stix:ThreatActor ;
+    rdfs:label "Opal Sleet" .
+
+cskg:Osmium a stix:ThreatActor ;
+    rdfs:label "Osmium" .
+
+cskg:Phishing-as-a-Service_\(PhaaS\) a stix:AttackPattern ;
+    rdfs:label "Phishing-as-a-Service (PhaaS)" .
+
+cskg:Phishing-as-a-Service_\(PhaaS\)_platform a stix:Indicator ;
+    rdfs:label "Phishing-as-a-Service (PhaaS) platform" .
+
+cskg:Private_AI_Compute cskg:ensures cskg:personal_data_stays_private ;
+    cskg:is cskg:a_privacy-enhancing_technology ;
+    cskg:processes cskg:AI_queries .
+
+cskg:Rhadamanthys_infostealer a stix:Malware ;
+    rdfs:label "Rhadamanthys infostealer" .
+
+cskg:SMS_phishing a stix:AttackPattern ;
+    rdfs:label "SMS phishing" .
+
+cskg:SMS_phishing_attacks a stix:AttackPattern ;
+    rdfs:label "SMS phishing attacks" .
+
+cskg:Service_rental_for_violence a stix:AttackPattern ;
+    rdfs:label "Service rental for violence" .
+
+cskg:TA406 a stix:ThreatActor ;
+    rdfs:label "TA406" .
+
+cskg:Targeting_banking_URLs a stix:AttackPattern ;
+    rdfs:label "Targeting banking URLs" .
+
+cskg:US_non-profit_organization cskg:is_targeted_by cskg:China-linked_threat_actor .
+
+cskg:Using_trusted_apps_or_social_platforms_as_attack_vectors a stix:AttackPattern ;
+    rdfs:label "Using trusted apps or social platforms as attack vectors" .
+
+cskg:Vedalia a stix:ThreatActor ;
+    rdfs:label "Vedalia" .
+
+cskg:Windows_11_KB5067036_update a stix:Vulnerability ;
+    rdfs:label "Windows 11 KB5067036 update" .
+
+cskg:Windows_11_Task_Manager a stix:Vulnerability ;
+    rdfs:label "Windows 11 Task Manager" ;
+    cskg:affected_by cskg:optional_Windows_11_KB5067036_update .
+
+cskg:Zero-day_exploit a stix:AttackPattern ;
+    rdfs:label "Zero-day exploit" .
+
+cskg:Zero_Trust_models a stix:AttackPattern ;
+    rdfs:label "Zero Trust models" .
+
+cskg:advanced_threat_actor a stix:ThreatActor ;
+    rdfs:label "advanced threat actor" ;
+    cskg:deploy cskg:custom_malware ;
+    cskg:exploited cskg:CVE-2025-20337,
+        cskg:CVE-2025-5777,
+        cskg:Citrix_Bleed_2 .
+
+cskg:an_advanced_threat_actor cskg:designed_to_deliver cskg:custom_malware ;
+    cskg:exploiting cskg:two_then-zero-day_security_flaws_in_Cisco_Identity_Service_Engine_\(ISE\)_and_Citrix_NetScaler_ADC_products .
+
+cskg:bypass_authentication a stix:AttackPattern ;
+    rdfs:label "bypass authentication" .
+
+cskg:continuous_monitoring a stix:AttackPattern ;
+    rdfs:label "continuous monitoring" .
+
+cskg:corrupt_industrial_control_systems a stix:AttackPattern ;
+    rdfs:label "corrupt industrial control systems" .
+
+cskg:data_exfiltration a stix:AttackPattern ;
+    rdfs:label "data exfiltration" .
+
+cskg:data_theft a stix:AttackPattern ;
+    rdfs:label "data theft" .
+
+cskg:device_control a stix:AttackPattern ;
+    rdfs:label "device control" .
+
+cskg:domain_controller_compromise a stix:AttackPattern ;
+    rdfs:label "domain controller compromise" .
+
+cskg:espionage a stix:AttackPattern ;
+    rdfs:label "espionage" .
+
+cskg:exploit_trusted_brands_like_E-ZPass_and_USPS a stix:Indicator ;
+    rdfs:label "exploit trusted brands like E-ZPass and USPS" .
+
+cskg:exploiting a stix:AttackPattern ;
+    rdfs:label "exploiting" .
+
+cskg:exploiting_zero-day_vulnerabilities a stix:AttackPattern ;
+    rdfs:label "exploiting zero-day vulnerabilities" .
+
+cskg:hands-on_keyboard_intrusions a stix:AttackPattern ;
+    rdfs:label "hands-on keyboard intrusions" .
+
+cskg:human_accountability a stix:AttackPattern ;
+    rdfs:label "human accountability" .
+
+cskg:known_issue_preventing_users_from_quitting a stix:Indicator ;
+    rdfs:label "known issue preventing users from quitting" .
+
+cskg:libimagecodecquramso a stix:Indicator ;
+    rdfs:label "libimagecodec.quram.so" .
+
+cskg:long-term_persistence a stix:AttackPattern ;
+    rdfs:label "long-term persistence" .
+
+cskg:n-day_exploitation a stix:AttackPattern ;
+    rdfs:label "n-day exploitation" .
+
+cskg:npm_package a stix:Indicator ;
+    rdfs:label "npm package" .
+
+cskg:phishing a stix:AttackPattern ;
+    rdfs:label "phishing" .
+
+cskg:ransomware a stix:Malware ;
+    rdfs:label "ransomware" .
+
+cskg:remote_control a stix:AttackPattern ;
+    rdfs:label "remote control" .
+
+cskg:review_bombing a stix:AttackPattern ;
+    rdfs:label "review bombing" .
+
+cskg:sabotage_database_operations a stix:AttackPattern ;
+    rdfs:label "sabotage database operations" .
+
+cskg:scoped_access a stix:AttackPattern ;
+    rdfs:label "scoped access" .
+
+cskg:shanhai666 a stix:ThreatActor ;
+    rdfs:label "shanhai666" ;
+    cskg:published cskg:NuGet_packages .
+
+cskg:spamming a stix:AttackPattern ;
+    rdfs:label "spamming" .
+
+cskg:susvsex a stix:Malware ;
+    rdfs:label "susvsex" ;
+    cskg:does_not_attempt_to cskg:hide_its_malicious_functionality ;
+    cskg:is_a cskg:Visual_Studio_Code_\(VS_Code\)_extension_with_basic_ransomware_capabilities ;
+    cskg:was_analyzed_by cskg:John_Tuckner ;
+    cskg:was_uploaded_on cskg:unknown_platform .
+
+cskg:time-delayed_payloads a stix:AttackPattern ;
+    rdfs:label "time-delayed payloads" .
+
+cskg:two_then-zero-day_security_flaws a stix:Vulnerability ;
+    rdfs:label "two then-zero-day security flaws" .
+
+cskg:typosquatting a stix:AttackPattern ;
+    rdfs:label "typosquatting" .
+
+cskg:unmanaged_extensions a stix:Vulnerability ;
+    rdfs:label "unmanaged extensions" ;
+    cskg:acts_like cskg:supply_chain_implants .
+
+cskg:upload_and_execution_of_arbitrary_payloads a stix:AttackPattern ;
+    rdfs:label "upload and execution of arbitrary payloads" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-12480> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-12480" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-20333> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-20333" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-20337> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-20337" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-20362> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-20362" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-21042> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-21042" .
+
+<https://w3id.org/sepses/resource/cve/CVE-2025-5777> a stix:Vulnerability ;
+    rdfs:label "CVE-2025-5777" .
+
+cskg:63_new_security_vulnerabilities a stix:Vulnerability ;
+    rdfs:label "63 new security vulnerabilities" .
+
+cskg:China-linked_threat_actor a stix:ThreatActor ;
+    rdfs:label "China-linked threat actor" ;
+    cskg:targeted cskg:US_non-profit_organization .
+
+cskg:Citrix_Bleed_2 a stix:Vulnerability ;
+    rdfs:label "Citrix Bleed 2" .
+
+cskg:LANDFALL a stix:Malware ;
+    rdfs:label "LANDFALL" ;
+    cskg:targeted cskg:the_Middle_East .
+
+cskg:Lighthouse a stix:Malware ;
+    rdfs:label "Lighthouse" ;
+    cskg:used_for cskg:large-scale_SMS_phishing_attacks .
+
+cskg:Lighthouse_phishing-as-a-service_platform cskg:impersonates cskg:US_Postal_Service_and_E-ZPass_toll_systems .
+
+cskg:Maverick a stix:Malware ;
+    rdfs:label "Maverick" ;
+    cskg:propagated_via cskg:WhatsApp ;
+    cskg:targets cskg:Brazilian_users_and_banks .
+
+cskg:NuGet_packages a stix:Malware ;
+    rdfs:label "NuGet packages" ;
+    cskg:capable_of cskg:dropping_time-delayed_payloads ;
+    cskg:designed_to cskg:run_malicious_code .
+
+cskg:PureRAT a stix:Malware ;
+    rdfs:label "PureRAT" .
+
+cskg:Visual_Studio_Code_\(VS_Code\)_extension_with_basic_ransomware_capabilities a stix:Malware ;
+    rdfs:label "Visual Studio Code (VS Code) extension with basic ransomware capabilities" .
+
+cskg:a_critical-severity_remote_code_execution_\(RCE\)_vulnerability_in_BeeStation_products a stix:Vulnerability ;
+    rdfs:label "a critical-severity remote code execution (RCE) vulnerability in BeeStation products" .
+
+cskg:adhamuhistory-in-sublime-merge a stix:Indicator ;
+    rdfs:label "adhamu.history-in-sublime-merge" .
+
+cskg:ai-driven-devai-driven-dev a stix:Indicator ;
+    rdfs:label "ai-driven-dev.ai-driven-dev" .
+
+cskg:attacks a stix:AttackPattern ;
+    rdfs:label "attacks" .
+
+cskg:compromised_email_account a stix:Indicator ;
+    rdfs:label "compromised email account" .
+
+<http://group2.org/cskg/critical_vulnerability_in_Gladinet's_Triofox_file-sharing_and_remote-access_platform> a stix:Vulnerability ;
+    rdfs:label "critical vulnerability in Gladinet's Triofox file-sharing and remote-access platform" .
+
+cskg:cybercriminals a stix:ThreatActor ;
+    rdfs:label "cybercriminals" ;
+    cskg:uses cskg:Phishing .
+
+cskg:denial-of-service a stix:AttackPattern ;
+    rdfs:label "denial-of-service" .
+
+cskg:fake_packages a stix:Indicator ;
+    rdfs:label "fake packages" .
+
+cskg:information_disclosure a stix:AttackPattern ;
+    rdfs:label "information disclosure" .
+
+cskg:large-scale_SMS_phishing_attacks a stix:Indicator ;
+    rdfs:label "large-scale SMS phishing attacks" ;
+    cskg:exploits cskg:trusted_brands_like_E-ZPass_and_USPS .
+
+cskg:large-scale_spam_campaign a stix:Indicator ;
+    rdfs:label "large-scale spam campaign" ;
+    cskg:targets cskg:npm_registry .
+
+cskg:malware_disguised_as_stress-relief_programs a stix:Malware ;
+    rdfs:label "malware disguised as stress-relief programs" .
+
+cskg:npm_registry a stix:Indicator ;
+    rdfs:label "npm registry" .
+
+cskg:privilege_escalation a stix:AttackPattern ;
+    rdfs:label "privilege escalation" .
+
+cskg:ransomware_attack a stix:AttackPattern ;
+    rdfs:label "ransomware attack" ;
+    cskg:caused cskg:data_breach .
+
+cskg:supply_chain_implants a stix:AttackPattern ;
+    rdfs:label "supply chain implants" .
+
+cskg:data_breach a stix:AttackPattern ;
+    rdfs:label "data breach" ;
+    cskg:resulted_in <http://group2.org/cskg/theft_of_some_patients'_data> .
+
+cskg:remote_code_execution a stix:AttackPattern ;
+    rdfs:label "remote code execution" .
+
+cskg:Phishing a stix:AttackPattern ;
+    rdfs:label "Phishing" .
+
+cskg:custom_malware a stix:Malware ;
+    rdfs:label "custom malware" .
+

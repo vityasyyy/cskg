@@ -1,0 +1,1227 @@
+[
+  {
+    "source_url": "https://thehackernews.com/2025/11/over-46000-fake-npm-packages-flood.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": [
+        "large-scale spam campaign",
+        "npm registry",
+        "fake packages"
+      ],
+      "attack_patterns": [
+        "spamming"
+      ],
+      "relations": [
+        {
+          "subject": "Unknown actors",
+          "relationship": "uses",
+          "object": "large-scale spam campaign"
+        },
+        {
+          "subject": "large-scale spam campaign",
+          "relationship": "targets",
+          "object": "npm registry"
+        },
+        {
+          "subject": "Unknown actors",
+          "relationship": "publishes",
+          "object": "fake packages"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/google-sues-china-based-hackers-behind.html",
+    "entities": {
+      "threat_actors": [
+        "China-based hackers"
+      ],
+      "malware": [
+        "Lighthouse"
+      ],
+      "vulnerabilities": null,
+      "indicators": [
+        "Phishing-as-a-Service (PhaaS) platform",
+        "large-scale SMS phishing attacks",
+        "exploit trusted brands like E-ZPass and USPS"
+      ],
+      "attack_patterns": [
+        "Phishing-as-a-Service (PhaaS)",
+        "SMS phishing attacks"
+      ],
+      "relations": [
+        {
+          "subject": "China-based hackers",
+          "relationship": "uses",
+          "object": "Lighthouse"
+        },
+        {
+          "subject": "Lighthouse",
+          "relationship": "used for",
+          "object": "large-scale SMS phishing attacks"
+        },
+        {
+          "subject": "large-scale SMS phishing attacks",
+          "relationship": "exploits",
+          "object": "trusted brands like E-ZPass and USPS"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/amazon-uncovers-attacks-exploited-cisco.html",
+    "entities": {
+      "threat_actors": [
+        "Amazon's threat intelligence team"
+      ],
+      "malware": [
+        "custom malware"
+      ],
+      "vulnerabilities": [
+        "two then-zero-day security flaws"
+      ],
+      "indicators": [
+        "Cisco Identity Service Engine (ISE)",
+        "Citrix NetScaler ADC"
+      ],
+      "attack_patterns": [
+        "exploiting"
+      ],
+      "relations": [
+        {
+          "subject": "an advanced threat actor",
+          "relationship": "exploiting",
+          "object": "two then-zero-day security flaws in Cisco Identity Service Engine (ISE) and Citrix NetScaler ADC products"
+        },
+        {
+          "subject": "an advanced threat actor",
+          "relationship": "designed to deliver",
+          "object": "custom malware"
+        },
+        {
+          "subject": "Amazon's threat intelligence team",
+          "relationship": "observed",
+          "object": "an advanced threat actor"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/webinar-learn-how-leading-security.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": null
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/active-directory-under-siege-why.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Active Directory",
+          "relationship": "is_auth_for",
+          "object": "over 90% of Fortune 1000 companies"
+        },
+        {
+          "subject": "Active Directory",
+          "relationship": "is_target_for",
+          "object": "attackers"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/microsoft-fixes-63-security-flaws.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "63 new security vulnerabilities"
+      ],
+      "indicators": null,
+      "attack_patterns": [
+        "privilege escalation",
+        "remote code execution",
+        "information disclosure"
+      ],
+      "relations": [
+        {
+          "subject": "Microsoft",
+          "relationship": "patched",
+          "object": "63 new security vulnerabilities"
+        },
+        {
+          "subject": "Those vulnerabilities",
+          "relationship": "included",
+          "object": "privilege escalation"
+        },
+        {
+          "subject": "Those vulnerabilities",
+          "relationship": "included",
+          "object": "remote code execution"
+        },
+        {
+          "subject": "Those vulnerabilities",
+          "relationship": "included",
+          "object": "information disclosure"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/google-launches-private-ai-compute.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Google",
+          "relationship": "unveiled",
+          "object": "Private AI Compute"
+        },
+        {
+          "subject": "Private AI Compute",
+          "relationship": "is",
+          "object": "a privacy-enhancing technology"
+        },
+        {
+          "subject": "Private AI Compute",
+          "relationship": "processes",
+          "object": "AI queries"
+        },
+        {
+          "subject": "Private AI Compute",
+          "relationship": "ensures",
+          "object": "personal data stays private"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/whatsapp-malware-maverick-hijacks.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "Coyote",
+        "Maverick"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Decrypt",
+        "Targeting banking URLs",
+        "Monitoring banking applications"
+      ],
+      "relations": [
+        {
+          "subject": "Coyote",
+          "relationship": "has similarities with",
+          "object": "Maverick"
+        },
+        {
+          "subject": "Coyote",
+          "relationship": "targets",
+          "object": "Brazilian users and banks"
+        },
+        {
+          "subject": "Maverick",
+          "relationship": "propagated via",
+          "object": "WhatsApp"
+        },
+        {
+          "subject": "Maverick",
+          "relationship": "targets",
+          "object": "Brazilian users and banks"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/gootloader-is-back-using-new-font-trick.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "GootLoader"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "hands-on keyboard intrusions",
+        "domain controller compromise"
+      ],
+      "relations": [
+        {
+          "subject": "GootLoader",
+          "relationship": "observed",
+          "object": "Huntress"
+        },
+        {
+          "subject": "Huntress",
+          "relationship": "reported",
+          "object": "GootLoader infections"
+        },
+        {
+          "subject": "GootLoader infections",
+          "relationship": "resulted in",
+          "object": "hands-on keyboard intrusions and domain controller compromise"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/cisos-expert-guide-to-ai-supply-chain.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "AI-enabled supply chain attacks"
+      ],
+      "relations": []
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/researchers-detect-malicious-npm.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "@acitons/artifact"
+      ],
+      "vulnerabilities": null,
+      "indicators": [
+        "npm package"
+      ],
+      "attack_patterns": [
+        "typosquatting",
+        "data exfiltration"
+      ],
+      "relations": [
+        {
+          "subject": "@acitons/artifact",
+          "relationship": "typosquats",
+          "object": "@actions/artifact"
+        },
+        {
+          "subject": "@acitons/artifact",
+          "relationship": "targets",
+          "object": "GitHub-owned repositories"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/android-trojan-fantasy-hub-malware.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "Android remote access trojan (RAT)",
+        "Fantasy Hub"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "device control",
+        "espionage"
+      ],
+      "relations": [
+        {
+          "subject": "Fantasy Hub",
+          "relationship": "sold_on",
+          "object": "Russian-speaking Telegram channels"
+        },
+        {
+          "subject": "Fantasy Hub",
+          "relationship": "enables",
+          "object": "device control and espionage"
+        },
+        {
+          "subject": "Fantasy Hub",
+          "relationship": "allows",
+          "object": "threat actors to collect SMS messages, contacts, call logs, images, and videos"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/hackers-exploiting-triofox-flaw-to.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "CVE-2025-12480"
+      ],
+      "indicators": null,
+      "attack_patterns": [
+        "n-day exploitation",
+        "bypass authentication",
+        "upload and execution of arbitrary payloads"
+      ],
+      "relations": [
+        {
+          "subject": "CVE-2025-12480",
+          "relationship": "is a vulnerability of",
+          "object": "Gladinet's Triofox file-sharing and remote access platform"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/konni-hackers-turn-googles-find-hub.html",
+    "entities": {
+      "threat_actors": [
+        "Konni",
+        "Earth Imp",
+        "Opal Sleet",
+        "Osmium",
+        "TA406",
+        "Vedalia"
+      ],
+      "malware": [
+        "malware disguised as stress-relief programs"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "data theft",
+        "remote control"
+      ],
+      "relations": [
+        {
+          "subject": "The North Korea-affiliated threat actor known as Konni",
+          "relationship": "has been attributed to",
+          "object": "a new set of attacks targeting both Android and Windows devices for data theft and remote control"
+        },
+        {
+          "subject": "Attackers",
+          "relationship": "impersonated",
+          "object": "psychological counselors and North Korean human rights activists"
+        },
+        {
+          "subject": "Attackers",
+          "relationship": "distributed",
+          "object": "malware disguised as stress-relief programs"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/weekly-recap-hyper-v-malware-malicious.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": null
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/new-browser-security-report-reveals.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "unmanaged extensions"
+      ],
+      "indicators": [
+        "Browser Security Report 2025"
+      ],
+      "attack_patterns": [
+        "supply chain implants"
+      ],
+      "relations": [
+        {
+          "subject": "Browser",
+          "relationship": "converges",
+          "object": "Identity risks, SaaS risks, AI-related risks"
+        },
+        {
+          "subject": "unmanaged extensions",
+          "relationship": "acts_like",
+          "object": "supply chain implants"
+        },
+        {
+          "subject": "security leaders",
+          "relationship": "discovering",
+          "object": "risks"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/large-scale-clickfix-phishing-attacks.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "PureRAT"
+      ],
+      "vulnerabilities": null,
+      "indicators": [
+        "compromised email account",
+        "ClickFix-style pages"
+      ],
+      "attack_patterns": [
+        "phishing"
+      ],
+      "relations": [
+        {
+          "subject": "attacker",
+          "relationship": "uses",
+          "object": "compromised email account"
+        },
+        {
+          "subject": "attacker",
+          "relationship": "targets",
+          "object": "hotel managers"
+        },
+        {
+          "subject": "attacker",
+          "relationship": "deploys",
+          "object": "PureRAT"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/glassworm-malware-discovered-in-three.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": [
+        "ai-driven-dev.ai-driven-dev",
+        "adhamu.history-in-sublime-merge"
+      ],
+      "attack_patterns": [
+        "GlassWorm campaign"
+      ],
+      "relations": [
+        {
+          "subject": "threat actors",
+          "relationship": "target",
+          "object": "Visual Studio Code (VS Code) ecosystem"
+        },
+        {
+          "subject": "threat actors",
+          "relationship": "use",
+          "object": "ai-driven-dev.ai-driven-dev"
+        },
+        {
+          "subject": "threat actors",
+          "relationship": "use",
+          "object": "adhamu.history-in-sublime-merge"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/microsoft-uncovers-whisper-leak-attack.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": null
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/samsung-zero-click-flaw-exploited-to.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "LANDFALL"
+      ],
+      "vulnerabilities": [
+        "CVE-2025-21042"
+      ],
+      "indicators": [
+        "libimagecodec.quram.so"
+      ],
+      "attack_patterns": [
+        "Zero-day exploit"
+      ],
+      "relations": [
+        {
+          "subject": "Samsung Galaxy Android device",
+          "relationship": "was_exploited_by",
+          "object": "zero-day"
+        },
+        {
+          "subject": "Zero-day",
+          "relationship": "delivered",
+          "object": "LANDFALL"
+        },
+        {
+          "subject": "LANDFALL",
+          "relationship": "targeted",
+          "object": "the Middle East"
+        },
+        {
+          "subject": "CVE-2025-21042",
+          "relationship": "is_exploited_by",
+          "object": "remote attackers"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/from-log4j-to-iis-chinas-hackers-turn.html",
+    "entities": {
+      "threat_actors": [
+        "China-linked threat actor"
+      ],
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "long-term persistence"
+      ],
+      "relations": [
+        {
+          "subject": "China-linked threat actor",
+          "relationship": "targeted",
+          "object": "U.S. non-profit organization"
+        },
+        {
+          "subject": "U.S. non-profit organization",
+          "relationship": "is targeted by",
+          "object": "China-linked threat actor"
+        },
+        {
+          "subject": "Broadcom's Symantec and Carbon Black teams",
+          "relationship": "reported",
+          "object": "cyber attack by China-linked threat actor on U.S. non-profit organization"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/hidden-logic-bombs-in-malware-laced.html",
+    "entities": {
+      "threat_actors": [
+        "shanhai666"
+      ],
+      "malware": [
+        "NuGet packages"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "time-delayed payloads",
+        "sabotage database operations",
+        "corrupt industrial control systems"
+      ],
+      "relations": [
+        {
+          "subject": "shanhai666",
+          "relationship": "published",
+          "object": "NuGet packages"
+        },
+        {
+          "subject": "NuGet packages",
+          "relationship": "capable of",
+          "object": "dropping time-delayed payloads"
+        },
+        {
+          "subject": "NuGet packages",
+          "relationship": "designed to",
+          "object": "run malicious code"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/enterprise-credentials-at-risk-same-old.html",
+    "entities": {
+      "threat_actors": [
+        "cybercriminals"
+      ],
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Phishing"
+      ],
+      "relations": [
+        {
+          "subject": "Sarah from accounting",
+          "relationship": "victimized by",
+          "object": "cybercriminals"
+        },
+        {
+          "subject": "cybercriminals",
+          "relationship": "uses",
+          "object": "Phishing"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/google-launches-new-maps-feature-to.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "review bombing"
+      ],
+      "relations": [
+        {
+          "subject": "Google",
+          "relationship": "introduces",
+          "object": "dedicated form for businesses to report extortion attempts"
+        },
+        {
+          "subject": "threat actors",
+          "relationship": "post",
+          "object": "inauthentic bad reviews"
+        },
+        {
+          "subject": "threat actors",
+          "relationship": "demand",
+          "object": "ransoms to remove negative comments"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/vibe-coded-malicious-vs-code-extension.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "Visual Studio Code (VS Code) extension with basic ransomware capabilities",
+        "susvsex"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "susvsex",
+          "relationship": "is a",
+          "object": "Visual Studio Code (VS Code) extension with basic ransomware capabilities"
+        },
+        {
+          "subject": "susvsex",
+          "relationship": "was analyzed by",
+          "object": "John Tuckner"
+        },
+        {
+          "subject": "susvsex",
+          "relationship": "was uploaded on",
+          "object": "unknown platform"
+        },
+        {
+          "subject": "susvsex",
+          "relationship": "does not attempt to",
+          "object": "hide its malicious functionality"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/trojanized-eset-installers-drop.html",
+    "entities": {
+      "threat_actors": [
+        "InedibleOchotense"
+      ],
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Phishing"
+      ],
+      "relations": [
+        {
+          "subject": "InedibleOchotense",
+          "relationship": "impersonates",
+          "object": "ESET"
+        },
+        {
+          "subject": "InedibleOchotense",
+          "relationship": "targets",
+          "object": "Ukrainian entities"
+        },
+        {
+          "subject": "InedibleOchotense",
+          "relationship": "aligned_with",
+          "object": "Russia"
+        },
+        {
+          "subject": "InedibleOchotense",
+          "relationship": "uses",
+          "object": "spear-phishing emails"
+        },
+        {
+          "subject": "InedibleOchotense",
+          "relationship": "uses",
+          "object": "Signal text messages"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/cisco-warns-of-new-firewall-attack.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "CVE-2025-20333",
+        "CVE-2025-20362"
+      ],
+      "indicators": null,
+      "attack_patterns": [
+        "denial-of-service"
+      ],
+      "relations": [
+        {
+          "subject": "Cisco Secure Firewall Adaptive Security Appliance (ASA) Software and Cisco Secure Firewall Threat Defense (FTD) Software releases",
+          "relationship": "are susceptible to",
+          "object": "CVE-2025-20333 and CVE-2025-20362"
+        },
+        {
+          "subject": "unpatched devices",
+          "relationship": "can cause",
+          "object": "denial-of-service"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/threatsday-bulletin-ai-tools-in-malware.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Online scams",
+        "Service rental for violence",
+        "Using trusted apps or social platforms as attack vectors"
+      ],
+      "relations": []
+    }
+  },
+  {
+    "source_url": "https://thehackernews.com/2025/11/bitdefender-named-representative-vendor.html",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Bitdefender",
+          "relationship": "recognized_as",
+          "object": "Representative Vendor in the Gartner\u00ae Market Guide for Managed Detection and Response (MDR)"
+        },
+        {
+          "subject": "Bitdefender",
+          "relationship": "included_in",
+          "object": "Gartner Market Guide"
+        },
+        {
+          "subject": "Gartner",
+          "relationship": "rates",
+          "object": "Managed Detection and Response (MDR) services providers"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/google-sues-to-dismantle-chinese-phishing-platform-behind-us-toll-scams/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Phishing",
+        "SMS phishing"
+      ],
+      "relations": [
+        {
+          "subject": "Google",
+          "relationship": "has filed a lawsuit against",
+          "object": "Lighthouse phishing-as-a-service platform"
+        },
+        {
+          "subject": "Cybercriminals",
+          "relationship": "use",
+          "object": "Lighthouse phishing-as-a-service platform"
+        },
+        {
+          "subject": "Lighthouse phishing-as-a-service platform",
+          "relationship": "impersonates",
+          "object": "U.S. Postal Service and E-ZPass toll systems"
+        },
+        {
+          "subject": "Cybercriminals",
+          "relationship": "steal",
+          "object": "credit card information"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/windows-11-now-supports-3rd-party-apps-for-native-passkey-management/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Microsoft",
+          "relationship": "announced",
+          "object": "passwordless authentication on Windows 11"
+        },
+        {
+          "subject": "Windows 11",
+          "relationship": "supports",
+          "object": "third-party passkey managers"
+        },
+        {
+          "subject": "Third-party passkey managers",
+          "relationship": "include",
+          "object": "1Password and Bitwarden"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/danabot-malware-is-back-to-infecting-windows-after-6-month-break/",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "DanaBot"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "attacks"
+      ],
+      "relations": [
+        {
+          "subject": "DanaBot malware",
+          "relationship": "returned with",
+          "object": "new version"
+        },
+        {
+          "subject": "DanaBot malware",
+          "relationship": "observed in",
+          "object": "attacks"
+        },
+        {
+          "subject": "Law enforcement's Operation Endgame",
+          "relationship": "disrupted",
+          "object": "DanaBot malware activity"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bug-causing-false-windows-10-end-of-support-alerts/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Microsoft",
+          "relationship": "has resolved",
+          "object": "a bug causing incorrect Windows 10 end-of-support warnings"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/extending-zero-trust-to-ai-agents-never-trust-always-verify-goes-autonomous/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "Zero Trust models",
+        "AI agents",
+        "scoped access",
+        "continuous monitoring",
+        "human accountability"
+      ],
+      "relations": [
+        {
+          "subject": "AI agents",
+          "relationship": "gain autonomy",
+          "object": "act, decide, and access data"
+        },
+        {
+          "subject": "Token Security",
+          "relationship": "explains how to extend",
+          "object": "'never trust, always verify' to agentic AI"
+        },
+        {
+          "subject": "agentic AI",
+          "relationship": "associated with",
+          "object": "scoped access, continuous monitoring, and human accountability"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/new-uk-laws-to-strengthen-critical-infrastructure-cyber-defenses/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": null
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/hackers-exploited-citrix-cisco-ise-flaws-in-zero-day-attacks/",
+    "entities": {
+      "threat_actors": [
+        "advanced threat actor"
+      ],
+      "malware": [
+        "custom malware"
+      ],
+      "vulnerabilities": [
+        "Citrix Bleed 2",
+        "CVE-2025-5777",
+        "CVE-2025-20337"
+      ],
+      "indicators": null,
+      "attack_patterns": [
+        "exploiting zero-day vulnerabilities"
+      ],
+      "relations": [
+        {
+          "subject": "advanced threat actor",
+          "relationship": "exploited",
+          "object": "Citrix Bleed 2"
+        },
+        {
+          "subject": "advanced threat actor",
+          "relationship": "exploited",
+          "object": "CVE-2025-5777"
+        },
+        {
+          "subject": "advanced threat actor",
+          "relationship": "exploited",
+          "object": "CVE-2025-20337"
+        },
+        {
+          "subject": "CVE-2025-5777",
+          "relationship": "in",
+          "object": "NetScaler ADC and Gateway"
+        },
+        {
+          "subject": "CVE-2025-20337",
+          "relationship": "affecting",
+          "object": "Cisco Identity Service Engine"
+        },
+        {
+          "subject": "advanced threat actor",
+          "relationship": "deploy",
+          "object": "custom malware"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/synnovis-notifies-of-data-breach-after-2024-ransomware-attack/",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "ransomware"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": [
+        "data breach",
+        "ransomware attack"
+      ],
+      "relations": [
+        {
+          "subject": "Synnovis",
+          "relationship": "was targeted by",
+          "object": "ransomware attack"
+        },
+        {
+          "subject": "Synnovis",
+          "relationship": "experienced",
+          "object": "data breach"
+        },
+        {
+          "subject": "ransomware attack",
+          "relationship": "caused",
+          "object": "data breach"
+        },
+        {
+          "subject": "data breach",
+          "relationship": "resulted in",
+          "object": "theft of some patients' data"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-windows-task-manager-bug-affecting-performance/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "Windows 11 Task Manager",
+        "Windows 11 KB5067036 update"
+      ],
+      "indicators": [
+        "known issue preventing users from quitting"
+      ],
+      "attack_patterns": [
+        "Installing updates"
+      ],
+      "relations": [
+        {
+          "subject": "Microsoft",
+          "relationship": "resolved",
+          "object": "known issue preventing users from quitting the Windows 11 Task Manager"
+        },
+        {
+          "subject": "Windows 11 Task Manager",
+          "relationship": "affected by",
+          "object": "optional Windows 11 KB5067036 update"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/rhadamanthys-infostealer-disrupted-as-cybercriminals-lose-server-access/",
+    "entities": {
+      "threat_actors": null,
+      "malware": [
+        "Rhadamanthys infostealer"
+      ],
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Rhadamanthys infostealer operation",
+          "relationship": "disrupted",
+          "object": "malware-as-a-service customers' access to their servers"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/synology-fixes-beestation-zero-days-demoed-at-pwn2own-ireland/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "a critical-severity remote code execution (RCE) vulnerability in BeeStation products"
+      ],
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Synology",
+          "relationship": "has addressed",
+          "object": "a critical-severity remote code execution (RCE) vulnerability in BeeStation products"
+        },
+        {
+          "subject": "The vulnerability",
+          "relationship": "is in",
+          "object": "BeeStation products"
+        },
+        {
+          "subject": "The vulnerability",
+          "relationship": "was demonstrated at",
+          "object": "the recent Pwn2Own hacking competition"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/security/hackers-abuse-triofox-antivirus-feature-to-deploy-remote-access-tools/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": [
+        "critical vulnerability in Gladinet's Triofox file-sharing and remote-access platform"
+      ],
+      "indicators": null,
+      "attack_patterns": [
+        "remote code execution"
+      ],
+      "relations": [
+        {
+          "subject": "Hackers",
+          "relationship": "exploited",
+          "object": "critical vulnerability in Gladinet's Triofox file-sharing and remote-access platform"
+        },
+        {
+          "subject": "Hackers",
+          "relationship": "used",
+          "object": "the built-in antivirus feature in Triofox"
+        },
+        {
+          "subject": "Hackers",
+          "relationship": "achieved",
+          "object": "remote code execution with SYSTEM privileges"
+        }
+      ]
+    }
+  },
+  {
+    "source_url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-11-23h2-home-and-pro-reach-end-of-support/",
+    "entities": {
+      "threat_actors": null,
+      "malware": null,
+      "vulnerabilities": null,
+      "indicators": null,
+      "attack_patterns": null,
+      "relations": [
+        {
+          "subject": "Microsoft",
+          "relationship": "reminded",
+          "object": "customers"
+        },
+        {
+          "subject": "systems",
+          "relationship": "running",
+          "object": "Home and Pro editions of Windows 11 23H2"
+        },
+        {
+          "subject": "Home and Pro editions of Windows 11 23H2",
+          "relationship": "have stopped receiving",
+          "object": "security updates"
+        }
+      ]
+    }
+  }
+]
