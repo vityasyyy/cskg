@@ -1,14 +1,81 @@
 services:
+  # 1. The Message Queue
+  redis:
+    image: redis:7-alpine
+    container_name: cskg_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  # 2. The Graph Database (Virtuoso)
   virtuoso:
     image: openlink/virtuoso-opensource-7
+    container_name: cskg_virtuoso
     ports:
-      - "8890:8890"
-      - "1111:1111"
+      - "8890:8890" # SPARQL endpoint
+      - "1111:1111" # SQL endpoint
     environment:
       - DBA_PASSWORD=mysecretpassword
     volumes:
-      - ./group2_cskg.ttl:/database/to_load/
+      # This is the persistent storage for the graph data
       - virtuoso_db:/database
+      - ./pipeline/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+
+  # 3. The API Server
+  api:
+    build: .
+    container_name: cskg_api
+    command: uvicorn server.api_server:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    # No volume needed, it talks to Virtuoso over the network
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: always
+    depends_on:
+      - redis
+      - virtuoso # Wait for the DB to be ready
+
+  # 4. The Article Producer (Scraper)
+  producer:
+    build: .
+    container_name: cskg_producer
+    command: >
+      sh -c "while true; do 
+        python -m pipeline.scraper; 
+        echo 'Producer sleeping for 5 minutes...'; 
+        sleep 300; 
+      done"
+    restart: always
+    depends_on:
+      - redis
+
+  extractor:
+    build: .
+    container_name: cskg_extractor
+    command: python pipeline/extractor_worker.py
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONPATH=/app
+    restart: always
+    depends_on:
+      - redis
+      - producer
+
+  # 6. The Graph Builder Worker
+  graph_builder:
+    build: .
+    container_name: cskg_graph_builder
+    command: python pipeline/builder_worker.py
+    environment:
+      - PYTHONPATH=/app
+    restart: always
+    depends_on:
+      - redis
+      - extractor
+      - virtuoso # Wait for the DB to be ready
 
 volumes:
+  # This is the persistent data volume for Virtuoso
   virtuoso_db:

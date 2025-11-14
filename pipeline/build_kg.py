@@ -10,15 +10,38 @@ MY_KG = Namespace("http://group2.org/cskg/")
 STIX = Namespace("http://docs.oasis-open.org/cti/ns/stix#")
 SEPSES_CVE = Namespace("https://w3id.org/sepses/resource/cve/")
 
+RELATIONSHIP_MAP = {
+    "uses": STIX.uses,
+    "targets": STIX.targets,
+    "exploits": STIX.exploits,
+    "mitigates": STIX.mitigates,
+    "attributed_to": STIX.attributed_to,
+    "variant_of": STIX.variant_of,
+    "located_in": STIX.located_in,
+    "impersonates": STIX.impersonates,
+    "reports": STIX.reports,
+    "patched": STIX.patched,
+    "resolved": STIX.resolved,
+    "disrupted": STIX.disrupted,
+    "aligned_with": STIX.aligned_with,
+    "observes": STIX.observes,
+    "has_similarities_with": STIX.has_similarities_with,
+    "propagated_via": STIX.propagated_via,
+}
 
-def build_graph(extractions):
+
+def build_graph(extractions, existing_graph=None):
     """Builds an RDF graph from the extracted entities and relations."""
-    g = Graph()
-
-    # Bind prefixes for cleaner Turtle output
-    g.bind("cskg", MY_KG)
-    g.bind("stix", STIX)
-    g.bind("rdfs", RDFS)
+    if existing_graph is not None:
+        g = existing_graph
+        print("Adding new triples to existing graph...")
+    else:
+        g = Graph()
+        print("Building new RDF graph...")
+        # Bind prefixes only when creating a new graph
+        g.bind("cskg", MY_KG)
+        g.bind("stix", STIX)
+        g.bind("rdfs", RDFS)
 
     print("Building RDF graph...")
 
@@ -82,8 +105,13 @@ def build_graph(extractions):
             subj_uri = safe_uri(MY_KG, rel["subject"])
             obj_uri = safe_uri(MY_KG, rel["object"])
 
-            # Use the relationship text to create a new property in our namespace
-            rel_prop = safe_uri(MY_KG, rel["relationship"])
+            # Use the mapping to get the correct STIX property
+            relationship_str = rel["relationship"]
+
+            # Get the real STIX property, or fall back to your custom one if not found
+            rel_prop = RELATIONSHIP_MAP.get(
+                relationship_str, safe_uri(MY_KG, relationship_str)
+            )
 
             g.add((subj_uri, rel_prop, obj_uri))
 

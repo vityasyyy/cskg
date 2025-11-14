@@ -4,7 +4,6 @@ beautifulsoup4
 
 # For building the Knowledge Graph
 rdflib
-
 # For the LLM pipeline
 langchain
 langchain-google-genai
@@ -14,3 +13,11 @@ pydantic
 
 #dotenv
 python-dotenv
+
+# For the Query API
+fastapi
+uvicorn[standard]
+
+# For the Event-Driven Pipeline
+SPARQLWrapper
+redis

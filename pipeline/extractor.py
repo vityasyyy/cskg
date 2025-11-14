@@ -114,7 +114,7 @@ def extract_entities(articles):
         try:
             response = chain.invoke({"article_text": article["content"]})
             all_extractions.append(
-                {"source_url": article["link"], "entities": response.dict()}
+                {"source_url": article["link"], "entities": response.model_dump()}
             )
         except Exception as e:
             print(f"Failed to extract from {article['link']}. Error: {e}")
