@@ -8,7 +8,6 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 
 
-# --- 1. Define your desired JSON output structure using Pydantic ---
 class EntityRelation(BaseModel):
     subject: str = Field(description="The primary entity, e.g., 'APT29'")
     relationship: str = Field(
@@ -40,43 +39,62 @@ class CyberEntities(BaseModel):
     )
 
 
-# --- 2. Set up the LLM, Parser, and Prompt ---
 def get_extraction_chain():
     load_dotenv()
-    # Set your API key
     gemini_key = os.getenv("OPENAI_API_KEY")
 
-    # 2. Check if the variable actually has a value.
     if gemini_key:
-        # 3. If it exists, assign it. The type checker now knows
-        #    gemini_key is a string, not None.
         os.environ["OPENAI_API_KEY"] = gemini_key
     else:
-        # 4. If it's None or empty, print an error and stop.
         print("ERROR: OPENAI_API_KEY not found in .env file.")
         print("Please ensure your .env file is correct.")
-        return  # Stop the function
+        return
 
-    # Initialize the LLM
     llm = ChatOpenAI(model="gpt-4")
-
-    # Initialize the parser
     parser = PydanticOutputParser(pydantic_object=CyberEntities)
 
-    # Create the prompt template
+    # relationship from the stix ontology
+    ALLOWED_RELATIONSHIPS = [
+        "uses",
+        "targets",
+        "exploits",
+        "mitigates",
+        "attributed_to",
+        "variant_of",
+        "located_in",
+        "impersonates",
+        "reports",
+        "patched",
+        "resolved",
+        "disrupted",
+        "aligned_with",
+        "observes",
+        "has_similarities_with",
+        "propagated_via",
+    ]
+
+    new_template = """
+    Analyze the following cybersecurity article. Extract all key entities and their relationships.
+    
+    When extracting a relationship, you MUST use one of the following verbs for the 'relationship' field:
+    {allowed_relationships}
+    
+    {format_instructions}
+    
+    Article Text:
+    "{article_text}"
+    """
+
     prompt = PromptTemplate(
-        template="""
-        Analyze the following cybersecurity article. Extract all key entities and their relationships.
-        {format_instructions}
-        
-        Article Text:
-        "{article_text}"
-        """,
+        template=new_template,
         input_variables=["article_text"],
-        partial_variables={"format_instructions": parser.get_format_instructions()},
+        partial_variables={
+            "format_instructions": parser.get_format_instructions(),
+            # Pass our allowed list into the prompt
+            "allowed_relationships": ", ".join(ALLOWED_RELATIONSHIPS),
+        },
     )
 
-    # Create the chain
     chain = prompt | llm | parser
     return chain
 
@@ -89,14 +107,12 @@ def extract_entities(articles):
 
     if chain is None:
         print("Chain initialization failed. Aborting extraction.")
-        return []  # Return an empty list
+        return []
 
     for i, article in enumerate(articles):
         print(f"Extracting from article {i + 1}/{len(articles)}: {article['title']}")
         try:
-            # Run the extraction
             response = chain.invoke({"article_text": article["content"]})
-            # Store the source URL with the extraction
             all_extractions.append(
                 {"source_url": article["link"], "entities": response.dict()}
             )
@@ -107,13 +123,11 @@ def extract_entities(articles):
 
 
 if __name__ == "__main__":
-    # Load the articles scraped in the previous step
     with open("articles.json", "r", encoding="utf-8") as f:
         articles_to_process = json.load(f)
 
     extractions = extract_entities(articles_to_process)
 
-    # Save extractions to a new file
     with open("extractions.json", "w", encoding="utf-8") as f:
         json.dump(extractions, f, indent=2)
 

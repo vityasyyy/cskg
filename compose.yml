@@ -2,16 +2,13 @@ services:
   virtuoso:
     image: openlink/virtuoso-opensource-7
     ports:
-      - "8890:8890" # SPARQL endpoint
-      - "1111:1111" # Conductor UI
+      - "8890:8890"
+      - "1111:1111"
     environment:
       - DBA_PASSWORD=mysecretpassword
     volumes:
-      # Mount a volume to persist the database
+      - ./group2_cskg.ttl:/database/to_load/
       - virtuoso_db:/database
-      # *** THIS IS THE IMPORTANT PART ***
-      # Mounts your KG file into Virtuoso's auto-load directory
-      - ./group2_cskg.ttl:/database/to_load/group2_cskg.ttl
 
 volumes:
   virtuoso_db:
