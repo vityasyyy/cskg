@@ -4,6 +4,7 @@ import time
 import os
 from pipeline.extractor import get_extraction_chain  # Import from your existing file
 from typing import cast, Tuple, Optional
+from dotenv import load_dotenv
 
 # Redis connection
 R_HOST = "redis"
@@ -22,13 +23,14 @@ def connect_to_redis():
             return r
         except redis.ConnectionError as e:
             print(f"Extractor waiting for Redis... ({e})")
-            time.sleep(5)
+            raise e
 
 
 def run_extractor():
-    if not os.getenv("OPENAI_API_KEY"):
-        print("ERROR: OPENAI_API_KEY not found. Extractor cannot start.")
-        return
+    load_dotenv()
+    if not os.getenv("GOOGLE_API_KEY"):
+        print("ERROR: GOOGLE_API_KEY not found. Extractor cannot start.")
+        raise Exception("Missing GOOGLE_API_KEY")
 
     print("Initializing LLM chain...")
     chain = get_extraction_chain()
@@ -71,8 +73,17 @@ def run_extractor():
         except Exception as e:
             print(f"Error processing article: {e}")
             # In a real system, you might push this to an error queue
-            time.sleep(1)
+            raise e
 
 
 if __name__ == "__main__":
-    run_extractor()
+    try:
+        print("=== Worker Starting ===")
+        run_extractor()  # or run_builder()
+        print("=== Worker Completed ===")
+    except Exception as e:
+        print(f"FATAL ERROR: {e}")
+        import traceback
+
+        traceback.print_exc()
+        raise

@@ -15,13 +15,19 @@ services:
       - "8890:8890" # SPARQL endpoint
       - "1111:1111" # SQL endpoint
     environment:
+      - VIRT_SPARQL_ENDPOINT=/sparql
       - DBA_PASSWORD=mysecretpassword
     volumes:
       # This is the persistent storage for the graph data
       - virtuoso_db:/database
-      - ./pipeline/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pipeline/virtuoso-scripts:/initdb.d
     restart: always
-
+    healthcheck:
+      test: ["CMD", "isql", "1111", "dba", "mysecretpassword", "exec=status()"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
   # 3. The API Server
   api:
     build: .
@@ -30,8 +36,8 @@ services:
     ports:
       - "8000:8000"
     # No volume needed, it talks to Virtuoso over the network
-    environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    env_file:
+      - .env
     restart: always
     depends_on:
       - redis
@@ -54,10 +60,13 @@ services:
   extractor:
     build: .
     container_name: cskg_extractor
-    command: python pipeline/extractor_worker.py
+    command: >
+      sh -c "echo 'Extractor starting...' && 
+            python -u pipeline/extractor_worker.py"  # -u for unbuffered output
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PYTHONPATH=/app
+    env_file:
+      - .env
     restart: always
     depends_on:
       - redis
@@ -67,14 +76,21 @@ services:
   graph_builder:
     build: .
     container_name: cskg_graph_builder
-    command: python pipeline/builder_worker.py
+    command: >
+      sh -c "echo 'Builder starting...' && 
+            python -u pipeline/builder_worker.py"  # -u for unbuffered output
     environment:
       - PYTHONPATH=/app
+    env_file:
+      - .env
     restart: always
     depends_on:
-      - redis
-      - extractor
-      - virtuoso # Wait for the DB to be ready
+      redis:
+        condition: service_started
+      extractor:
+        condition: service_started
+      virtuoso:
+        condition: service_healthy
 
 volumes:
   # This is the persistent data volume for Virtuoso

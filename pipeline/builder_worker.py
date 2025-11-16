@@ -92,4 +92,13 @@ def run_builder():
 
 
 if __name__ == "__main__":
-    run_builder()
+    try:
+        print("=== Worker Starting ===")
+        run_builder()  # or run_builder()
+        print("=== Worker Completed ===")
+    except Exception as e:
+        print(f"FATAL ERROR: {e}")
+        import traceback
+
+        traceback.print_exc()
+        raise

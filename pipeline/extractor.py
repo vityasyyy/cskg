@@ -3,7 +3,7 @@ import json
 from typing import List, Optional
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 
@@ -41,16 +41,16 @@ class CyberEntities(BaseModel):
 
 def get_extraction_chain():
     load_dotenv()
-    gemini_key = os.getenv("OPENAI_API_KEY")
+    gemini_key = os.getenv("GOOGLE_API_KEY")
 
     if gemini_key:
-        os.environ["OPENAI_API_KEY"] = gemini_key
+        os.environ["GOOGLE_API_KEY"] = gemini_key
     else:
-        print("ERROR: OPENAI_API_KEY not found in .env file.")
+        print("ERROR: GOOGLE_API_KEY not found in .env file.")
         print("Please ensure your .env file is correct.")
         return
 
-    llm = ChatOpenAI(model="gpt-4")
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
     parser = PydanticOutputParser(pydantic_object=CyberEntities)
 
     # relationship from the stix ontology
@@ -78,6 +78,8 @@ def get_extraction_chain():
     
     When extracting a relationship, you MUST use one of the following verbs for the 'relationship' field:
     {allowed_relationships}
+
+    **IMPORTANT: If you do not find any entities for a specific category (e.g., 'threat_actors', 'malware'), you MUST return an empty list `[]` for that category. Do NOT return a list containing `null` or `None`.**
     
     {format_instructions}
     
