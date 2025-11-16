@@ -1,8 +1,7 @@
 import redis
 import json
-import time
 import os
-from pipeline.extractor import get_extraction_chain  # Import from your existing file
+from pipeline.extractor import get_extraction_chain
 from typing import cast, Tuple, Optional
 from dotenv import load_dotenv
 
@@ -55,7 +54,7 @@ def run_extractor():
 
             print(f"  [EXTRACTOR] Processing article: {article['title']}")
 
-            # This is the slow part (calling the LLM)
+            # format the prompt, send to llm, parse the llm response
             response = chain.invoke({"article_text": article["content"]})
 
             # Combine the source_url with the extracted entities

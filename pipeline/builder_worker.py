@@ -56,7 +56,7 @@ def run_builder():
                 f"  [BUILDER] Received extraction for: {extraction_data['source_url']}"
             )
 
-            # 1. Use your existing code to build a TINY, in-memory graph
+            # 1. Use existing code to build a TINY, in-memory graph
             g_new = rdflib.Graph()
             build_graph([extraction_data], existing_graph=g_new)
 

@@ -60,7 +60,7 @@ def run_producer():
     r = connect_to_redis()
 
     all_articles = []
-    for name, url in RSS_FEEDS.items():
+    for _, url in RSS_FEEDS.items():
         all_articles.extend(fetch_articles(url, MAX_ARTICLES_PER_FEED))
 
     new_articles_pushed = 0

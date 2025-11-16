@@ -1,10 +1,8 @@
 import re
-import json
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS
 
-# --- 1. Define your Namespaces ---
-# Your custom namespace
+# --- 1. Define Namespaces ---
 MY_KG = Namespace("http://group2.org/cskg/")
 # The STIX 2.1 Ontology namespace
 STIX = Namespace("http://docs.oasis-open.org/cti/ns/stix#")
@@ -108,7 +106,7 @@ def build_graph(extractions, existing_graph=None):
             # Use the mapping to get the correct STIX property
             relationship_str = rel["relationship"]
 
-            # Get the real STIX property, or fall back to your custom one if not found
+            # Get the real STIX property, or fall back to custom one if not found
             rel_prop = RELATIONSHIP_MAP.get(
                 relationship_str, safe_uri(MY_KG, relationship_str)
             )
@@ -116,18 +114,3 @@ def build_graph(extractions, existing_graph=None):
             g.add((subj_uri, rel_prop, obj_uri))
 
     return g
-
-
-if __name__ == "__main__":
-    # Load the extractions
-    with open("extractions.json", "r", encoding="utf-8") as f:
-        extractions_to_process = json.load(f)
-
-    kg = build_graph(extractions_to_process)
-
-    # Save the final KG
-    output_file = "group2_cskg.ttl"
-    kg.serialize(destination=output_file, format="turtle")
-
-    print(f"Successfully built Knowledge Graph and saved to {output_file}")
-    print(f"Total triples in graph: {len(kg)}")

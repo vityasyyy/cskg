@@ -1,5 +1,4 @@
 import os
-import json
 from typing import List, Optional
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -51,6 +50,7 @@ def get_extraction_chain():
         return
 
     llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-lite")
+    # Define the output parser based on our Pydantic model
     parser = PydanticOutputParser(pydantic_object=CyberEntities)
 
     # relationship from the stix ontology
@@ -99,38 +99,3 @@ def get_extraction_chain():
 
     chain = prompt | llm | parser
     return chain
-
-
-def extract_entities(articles):
-    """Uses the LLM chain to extract entities from a list of articles."""
-    print("Initializing LLM chain for extraction...")
-    chain = get_extraction_chain()
-    all_extractions = []
-
-    if chain is None:
-        print("Chain initialization failed. Aborting extraction.")
-        return []
-
-    for i, article in enumerate(articles):
-        print(f"Extracting from article {i + 1}/{len(articles)}: {article['title']}")
-        try:
-            response = chain.invoke({"article_text": article["content"]})
-            all_extractions.append(
-                {"source_url": article["link"], "entities": response.model_dump()}
-            )
-        except Exception as e:
-            print(f"Failed to extract from {article['link']}. Error: {e}")
-
-    return all_extractions
-
-
-if __name__ == "__main__":
-    with open("articles.json", "r", encoding="utf-8") as f:
-        articles_to_process = json.load(f)
-
-    extractions = extract_entities(articles_to_process)
-
-    with open("extractions.json", "w", encoding="utf-8") as f:
-        json.dump(extractions, f, indent=2)
-
-    print("Successfully extracted entities and saved to extractions.json")
