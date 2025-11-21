@@ -8,8 +8,10 @@ import time
 RSS_FEEDS = {
     "TheHackerNews": "http://feeds.feedburner.com/TheHackersNews",
     "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
+    "KrebsOnSecurity": "https://krebsonsecurity.com/feed/",
+    "FortiGuardLabs": "https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml",
 }
-MAX_ARTICLES_PER_FEED = 1  # Check the most recent 30
+MAX_ARTICLES_PER_FEED = 1
 
 # Redis connection details
 # We use 'redis' as the host name because it's the service name in docker-compose

@@ -39,6 +39,16 @@ services:
     env_file:
       - .env
     restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c ''import urllib.request; urllib.request.urlopen("http://localhost:8000/")'' || exit 1',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     depends_on:
       - redis
       - virtuoso # Wait for the DB to be ready
@@ -91,6 +101,30 @@ services:
         condition: service_started
       virtuoso:
         condition: service_healthy
+  summary:
+    build: .
+    container_name: cskg_summary
+    command: >
+      sh -c "echo 'Summary Worker Pending...' &&
+             while true; do 
+               echo 'Running Summary Task...';
+               python pipeline/graph_eval_worker.py; 
+               echo 'Task finished. Sleeping for 24 hours...'; 
+               sleep 86400; 
+             done"
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - .env
+    depends_on:
+      api:
+        condition: service_healthy
+      virtuoso:
+        condition: service_healthy
+      graph_builder:
+        condition: service_started
+    volumes:
+      - ./reports:/app/reports
 
 volumes:
   # This is the persistent data volume for Virtuoso
