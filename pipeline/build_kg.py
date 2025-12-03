@@ -1,10 +1,10 @@
 import re
 from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import RDF, RDFS, DCTERMS, OWL  # Added DCTERMS and SKOS
+from urllib.parse import quote
 
 # --- 1. Define Namespaces ---
 MY_KG = Namespace("http://group2.org/cskg/")
-# The STIX 2.1 Ontology namespace
 STIX = Namespace("http://docs.oasis-open.org/cti/ns/stix#")
 SEPSES_CVE = Namespace("https://w3id.org/sepses/resource/cve/")
 
@@ -36,33 +36,62 @@ def build_graph(extractions, existing_graph=None):
     else:
         g = Graph()
         print("Building new RDF graph...")
-        # Bind prefixes only when creating a new graph
         g.bind("cskg", MY_KG)
         g.bind("stix", STIX)
         g.bind("rdfs", RDFS)
+        g.bind("dcterms", DCTERMS)  # Bind Dublin Core for dates
+        g.bind("owl", OWL)  # Bind OWL for sameAs
 
     print("Building RDF graph...")
+
+    # Helper function to create a Canonical URI (Normalizes data for linking)
+    def safe_uri(namespace, text):
+        if not text:
+            return namespace["unknown"]
+        # 1. Lowercase
+        # 2. Remove all non-alphanumeric characters (removes spaces, dashes, dots)
+        #    "APT-29" -> "apt29", "APT 29" -> "apt29"
+        safe_text = re.sub(r"[\W_]+", "", text.lower())
+        return namespace[safe_text]
+
+    def unsafe_uri(namespace, text):
+        # Keeps original formatting safe for URI
+        return namespace[quote(text.replace(" ", "_"))]
 
     for item in extractions:
         report_url = item["source_url"]
         entities = item["entities"]
 
+        # --- CHANGE: Get the Date ---
+        published_date = item.get("published")
+
         # Create a URI for the report itself
         report_uri = URIRef(report_url)
         g.add((report_uri, RDF.type, STIX.Report))
 
-        # Helper function to create a safe URI
-        def safe_uri(namespace, text):
-            # Simple slugify for URI
-            safe_text = text.replace(" ", "_").replace(".", "").replace("/", "")
-            return namespace[safe_text]
+        # --- CHANGE: Add Timestamp Triple ---
+        if published_date and published_date != "N/A":
+            g.add((report_uri, DCTERMS.created, Literal(published_date)))
 
         # --- 2. Add all named entities as nodes ---
         for actor in entities.get("threat_actors") or []:
-            actor_uri = safe_uri(MY_KG, actor)
-            g.add((actor_uri, RDF.type, STIX.ThreatActor))
-            g.add((actor_uri, RDFS.label, Literal(actor)))
-            g.add((report_uri, STIX.mentions, actor_uri))  # Link report to entity
+            # 1. Generate both URIs
+            raw_actor_uri = unsafe_uri(MY_KG, actor)  # e.g., cskg:APT_29
+            canonical_actor_uri = safe_uri(MY_KG, actor)  # e.g., cskg:apt29
+
+            # 2. Define the Canonical Node (This is the one relationships will use)
+            g.add((canonical_actor_uri, RDF.type, STIX.ThreatActor))
+
+            # 3. Define the Raw Node (This preserves the original label)
+            g.add((raw_actor_uri, RDF.type, STIX.ThreatActor))
+            g.add((raw_actor_uri, RDFS.label, Literal(actor)))
+
+            # 4. Link Report to Canonical (Makes querying easier)
+            g.add((report_uri, STIX.mentions, canonical_actor_uri))
+
+            # 5. Link them with owl:sameAs
+            if raw_actor_uri != canonical_actor_uri:
+                g.add((raw_actor_uri, OWL.sameAs, canonical_actor_uri))
 
         for malware in entities.get("malware") or []:
             malware_uri = safe_uri(MY_KG, malware)
@@ -71,15 +100,11 @@ def build_graph(extractions, existing_graph=None):
             g.add((report_uri, STIX.mentions, malware_uri))
 
         for vuln in entities.get("vulnerabilities") or []:
-            # Check if the vulnerability string is a CVE
             cve_match = re.search(r"(CVE-\d{4}-\d{4,})", vuln, re.IGNORECASE)
-
             if cve_match:
-                # It's a CVE! Use the SEPSES URI.
                 cve_id = cve_match.group(1).upper()
-                vuln_uri = SEPSES_CVE[cve_id]  # e.g., .../cve/CVE-2023-1234
+                vuln_uri = SEPSES_CVE[cve_id]
             else:
-                # Not a CVE, use our own namespace
                 vuln_uri = safe_uri(MY_KG, vuln)
 
             g.add((vuln_uri, RDF.type, STIX.Vulnerability))
@@ -100,13 +125,11 @@ def build_graph(extractions, existing_graph=None):
 
         # --- 3. Add all relationships as edges ---
         for rel in entities.get("relations") or []:
+            # Important: Relationships use safe_uri, so they attach to the Canonical Node
             subj_uri = safe_uri(MY_KG, rel["subject"])
             obj_uri = safe_uri(MY_KG, rel["object"])
 
-            # Use the mapping to get the correct STIX property
             relationship_str = rel["relationship"]
-
-            # Get the real STIX property, or fall back to custom one if not found
             rel_prop = RELATIONSHIP_MAP.get(
                 relationship_str, safe_uri(MY_KG, relationship_str)
             )

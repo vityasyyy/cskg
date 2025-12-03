@@ -41,29 +41,26 @@ def run_extractor():
             if chain is None:
                 print("Extractor chain is not initialized. Exiting.")
                 return
-            # blpop blocks until an item appears in the list
-            # It returns a tuple: (list_name, item_bytes)
+
             task = cast(
                 Optional[Tuple[bytes, bytes]], r.blpop([ARTICLES_QUEUE], timeout=10)
             )
             if task is None:
-                continue  # Just a safety guard
+                continue
 
             _, article_json = task
             article = json.loads(article_json)
 
             print(f"  [EXTRACTOR] Processing article: {article['title']}")
 
-            # format the prompt, send to llm, parse the llm response
             response = chain.invoke({"article_text": article["content"]})
 
-            # Combine the source_url with the extracted entities
             extraction_data = {
                 "source_url": article["link"],
+                "published": article.get("published"),
                 "entities": response.model_dump(),
             }
 
-            # Push the result to the next queue
             r.rpush(EXTRACTIONS_QUEUE, json.dumps(extraction_data))
             print(
                 f"  [EXTRACTOR] Finished processing. Pushed to '{EXTRACTIONS_QUEUE}'."
@@ -71,14 +68,14 @@ def run_extractor():
 
         except Exception as e:
             print(f"Error processing article: {e}")
-            # In a real system, you might push this to an error queue
+            # In production, push to a dead-letter queue
             raise e
 
 
 if __name__ == "__main__":
     try:
         print("=== Worker Starting ===")
-        run_extractor()  # or run_builder()
+        run_extractor()
         print("=== Worker Completed ===")
     except Exception as e:
         print(f"FATAL ERROR: {e}")

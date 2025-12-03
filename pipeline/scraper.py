@@ -11,7 +11,7 @@ RSS_FEEDS = {
     "KrebsOnSecurity": "https://krebsonsecurity.com/feed/",
     "FortiGuardLabs": "https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml",
 }
-MAX_ARTICLES_PER_FEED = 1
+MAX_ARTICLES_PER_FEED = 2
 
 # Redis connection details
 # We use 'redis' as the host name because it's the service name in docker-compose
