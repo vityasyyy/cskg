@@ -1,146 +1,311 @@
-# Constructing a Cybersecurity Knowledge Graph (CSKG) from Unstructured Data
+# Cybersecurity Knowledge Graph (CSKG) from Unstructured Data
 
-This project implements an automated data pipeline to construct a Cybersecurity Knowledge Graph (CSKG) from unstructured data sources like security blogs and attack reports. The system scrapes articles, uses an LLM (via LangChain) to extract entities and relations, maps them to a formal ontology (STIX), and stores them in a Virtuoso SPARQL endpoint. The resulting knowledge graph is queryable via a simple REST API.
+> **Automated threat intelligence extraction, ontology mapping, and knowledge graph construction from security news feeds.**
 
-## 1. Unstructured Sources
+[![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)](#quick-start)
+[![Python](https://img.shields.io/badge/python-3.10+-blue?logo=python)](https://www.python.org/)
+[![STIX](https://img.shields.io/badge/ontology-STIX%202.1-green)](http://docs.oasis-open.org/cti/ns/stix#)
+[![Virtuoso](https://img.shields.io/badge/graph-Virtuoso-orange)](https://virtuoso.openlinksw.com/)
 
-The pipeline is designed to process unstructured text from any source. As per the assignment, we have identified the following source types:
+**Live Endpoints (when running):**
+- **REST API Docs** → `http://localhost:8000/docs`
+- **SPARQL Console** → `http://localhost:8890/sparql`
 
-1.  **Security News Blogs (RSS):** Continuously updated articles on new threats. (e.g., TheHackerNews, BleepingComputer)
-2.  **Vendor Attack Reports:** In-depth PDFs and blog posts (e.g., from Mandiant, CrowdStrike).
-3.  **CVE Descriptions:** Textual descriptions of vulnerabilities (e.g., from NVD).
-4.  **Threat Intel Tweets:** Short-form, real-time reports from researchers.
-5.  **Malware Analysis Reports:** Technical breakdowns of malware behavior.
+---
 
-The current implementation (`pipeline/scraper.py`) actively scrapes RSS feeds from **TheHackerNews** and **BleepingComputer** as a proof-of-concept.
+## 1. What is CSKG?
 
-## 2. Ontology
+Imagine reading dozens of cybersecurity blogs every day and trying to remember which threat actor uses which malware and who they target. CSKG does this automatically.
 
-We use a hybrid ontology approach, combining a well-established, existing ontology with a custom namespace for our graph.
+It is a **living knowledge graph** built from security news (RSS feeds, reports, and articles). An LLM reads each article, extracts entities like threat actors and vulnerabilities, maps them to a formal cybersecurity ontology (STIX), and stores them as linked data in a graph database. The result is a queryable, always-updating map of the global threat landscape.
 
-* **Primary Ontology: STIX 2.1**
-    We use the [STIX (Structured Threat Information Expression)](http://docs.oasis-open.org/cti/ns/stix#) namespace as our primary ontology. It is the industry standard for cybersecurity threat intelligence. Our `pipeline/build_kg.py` file explicitly maps extracted entities to STIX classes:
+**In plain terms:** It turns news articles into a structured database you can ask questions like *"Which threat actors are targeting healthcare right now?"* or *"What malware is linked to CVE-2025-XXXX?"*
 
-    * `STIX.ThreatActor`
-    * `STIX.Malware`
-    * `STIX.Vulnerability`
-    * `STIX.Indicator`
-    * `STIX.AttackPattern`
-    * `STIX.Report`
+---
 
-* **Custom Namespace: `cskg`**
-    We use our own namespace, `http://group2.org/cskg/`, for our named graph and for any entities that do not have a clear STIX equivalent.
+## 2. System at a Glance
 
-* **Relationship Mapping**
-    A key feature is the `RELATIONSHIP_MAP` in `pipeline/build_kg.py`. This maps plain-English verbs extracted by the LLM (e.g., "uses", "targets") directly to their formal STIX relationship properties (e.g., `STIX.uses`, `STIX.targets`). This ensures our graph is ontologically consistent.
+```mermaid
+flowchart LR
+    subgraph Internet
+        A1[TheHackerNews]
+        A2[BleepingComputer]
+        A3[KrebsOnSecurity]
+        A4[FortiGuardLabs]
+    end
 
-## 3. Pipeline Architecture
+    subgraph Docker
+        R[(Redis)]
+        P[Producer<br/>scraper.py]
+        E[Extractor<br/>extractor_worker.py]
+        B[Graph Builder<br/>builder_worker.py]
+        V[(Virtuoso<br/>Triple Store)]
+        API[FastAPI Server<br/>api_server.py]
+        S[Summary Worker<br/>graph_eval_worker.py]
+    end
 
-This project is built as an event-driven, microservice-based pipeline orchestrated by `docker-compose.yml`.
+    A1 & A2 & A3 & A4 -->|RSS Feeds| P
+    P -->|articles_queue| R
+    R -->|articles_queue| E
+    E -->|Gemini LLM| E
+    E -->|extractions_queue| R
+    R -->|extractions_queue| B
+    B -->|SPARQL INSERT| V
+    API <-->|SPARQL queries| V
+    S -.->|POST /query| API
+    S -.->|daily report| ./reports/
+```
 
-1.  **`producer` (`pipeline/scraper.py`)**
-    * A Python script that scrapes RSS feeds for new articles.
-    * It checks for duplicates using a Redis `set` (`seen_urls`).
-    * **Output:** Pushes new article (JSON) to the `articles_queue` in Redis.
+**Services (6 Docker containers):**
 
-2.  **`extractor` (`pipeline/extractor_worker.py`)**
-    * A Python worker that listens to the `articles_queue`.
-    * It uses a **LangChain** pipeline (`pipeline/extractor.py`) built with a Google Gemini LLM and Pydantic output parsers.
-    * The LLM is prompted to extract entities (Threat Actors, Malware, CVEs, Indicators) and their relationships (e.g., "APT29 *uses* new_malware").
-    * **Output:** Pushes the structured extraction (JSON) to the `extractions_queue` in Redis.
+| Service | Purpose | Key Tech |
+|---|---|---|
+| `producer` | Scrape RSS feeds every 5 min, deduplicate, queue articles | `feedparser`, `BeautifulSoup`, `redis` |
+| `extractor` | Pop articles from queue, run LLM to extract entities/relations | `LangChain`, `Gemini 2.0 Flash Lite`, `Pydantic` |
+| `graph_builder` | Pop extractions, build RDF triples, insert into Virtuoso | `rdflib`, `SPARQLWrapper` |
+| `api` | REST API for querying the graph | `FastAPI`, `SPARQLWrapper` |
+| `summary` | Run every 24h: query graph, generate strategic brief | `LangChain`, `Gemini` |
+| `virtuoso` | Persistent RDF triple store | `Virtuoso Open Source` |
+| `redis` | Message queue between producer → extractor → builder | `Redis 7` |
 
-3.  **`graph_builder` (`pipeline/builder_worker.py`)**
-    * A Python worker that listens to the `extractions_queue`.
-    * It uses `rdflib` to transform the JSON extraction into RDF triples, mapping them to the STIX ontology (from `build_kg.py`).
-    * **Output:** Connects to Virtuoso and executes a SPARQL `INSERT DATA` query to add the new triples to our named graph (`<http://group2.org/cskg>`).
+---
 
-4.  **`summary` (`pipeline/graph_eval_worker.py`)**
-    * A periodic worker that runs daily to assess the state of the knowledge graph.
-    * It queries the graph for all known Threat Actor capabilities and uses the LLM to generate a "Strategic Threat Landscape Assessment."
-    * **Output:** Saves a comprehensive Markdown report to the `reports/` directory (e.g., `reports/strategic_assessment_2025-11-21.md`).
+## 3. One Article's Journey
 
-5.  **`redis`**
-    * A Redis container that acts as the message bus (queuing system) between the producer, extractor, and builder.
+Let's trace what happens when a new article appears on BleepingComputer titled *"Deep dive into DragonForce ransomware and its Scattered Spider connection"*.
 
-6.  **`virtuoso`**
-    * The OpenLink Virtuoso container, which provides the persistent SPARQL endpoint. All triples are stored here.
-    * **SPARQL Endpoint:** `http://localhost:8890/sparql`
-    * **SQL scripts:** `pipeline/virtuoso-scripts/init.sql` runs on startup to set the correct permissions for the `SPARQL` user to be able to write to the graph.
+### Step 1: Scrape
+`producer` fetches the RSS feed, strips HTML, and pushes a JSON article:
+```json
+{
+  "title": "Deep dive into DragonForce ransomware...",
+  "link": "https://www.bleepingcomputer.com/...",
+  "published": "Wed, 03 Dec 2025 10:05:15 -0500",
+  "content": "DragonForce is a ransomware group that uses Scattered Spider..."
+}
+```
 
-7.  **`api` (`server/api_server.py`)**
-    * A FastAPI server that provides a simple REST API to query the graph.
-    * **Query Endpoint:** `POST /query`
-    * **Status Endpoint:** `GET /` (Shows total triples)
+### Step 2: Extract
+`extractor` sends the article text to Gemini. The LLM returns structured data:
+```json
+{
+  "threat_actors": ["DragonForce", "Scattered Spider"],
+  "malware": [],
+  "attack_patterns": ["initial access", "social engineering"],
+  "vulnerabilities": [],
+  "indicators": [],
+  "relations": [
+    {"subject": "DragonForce", "relation": "uses", "object": "Scattered Spider"},
+    {"subject": "Scattered Spider", "relation": "uses", "object": "social engineering"},
+    {"subject": "Scattered Spider", "relation": "uses", "object": "initial access"}
+  ]
+}
+```
 
-## 4. Summary/Statistics of Constructed KG
+### Step 3: Build Graph
+`graph_builder` transforms this into RDF triples and inserts them into Virtuoso:
 
-The knowledge graph is dynamic and grows with every new article scraped.
+```turtle
+@prefix stix: <http://docs.oasis-open.org/cti/ns/stix#> .
+@prefix cskg: <http://group2.org/cskg/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-* **Live Statistics:** You can get a live count of the total triples in the graph by accessing the API's status endpoint:
-    `GET http://localhost:8000/`
+<article-url> a stix:Report ;
+    stix:mentions cskg:dragonforce ,
+                  cskg:scatteredspider ,
+                  cskg:socialengineering ,
+                  cskg:initialaccess .
 
-* **Automated Strategic Reports:**
-    The system includes an automated analyst that evaluates the graph daily. It aggregates data on all threat actors and their tools to identify global trends.
-    * **Access:** Reports are generated automatically in the `reports/` folder.
-    * **Content:** Each report contains a "Strategic Threat Landscape Assessment," highlighting key active groups and tooling trends.
+cskg:dragonforce a stix:ThreatActor .
+cskg:scatteredspider a stix:ThreatActor ;
+    rdfs:label "Scattered Spider" ;
+    stix:uses cskg:socialengineering ,
+              cskg:initialaccess .
+```
 
-* **Graph Statistics (Evaluation):** We can run SPARQL queries to get statistics on the constructed graph.
+### Step 4: Query
+You can now query the live graph via REST API or SPARQL:
+```sparql
+SELECT * WHERE {
+  ?actor a stix:ThreatActor ;
+         rdfs:label "DragonForce" .
+  ?actor stix:uses ?tool .
+  ?tool rdfs:label ?tool_name .
+}
+```
 
-    **Query to count entities by type:**
+---
 
-    ```sparql
-    PREFIX stix: [http://docs.oasis-open.org/cti/ns/stix#](http://docs.oasis-open.org/cti/ns/stix#)
-    PREFIX rdfs: [http://www.w3.org/2000/01/rdf-schema#](http://www.w3.org/2000/01/rdf-schema#)
+## 4. Quick Start
 
-    SELECT (str(?type) as ?EntityType) (COUNT(DISTINCT ?s) as ?Count)
-    WHERE {
-      GRAPH [http://group2.org/cskg](http://group2.org/cskg) {
-        ?s a ?type .
-        # Filter for only STIX types
-        FILTER(CONTAINS(str(?type), "stix"))
-      }
-    }
-    GROUP BY ?type
-    ORDER BY DESC(?Count)
-    ```
+### Prerequisites
+- Docker & Docker Compose
+- A Google API key with Gemini access
 
-## 5. Linking to Existing KGs
+### Run it
+```bash
+# 1. Clone
+git clone <your-repo-url>
+cd <repo-name>
 
-**This requirement is successfully implemented.**
+# 2. Add your API key
+echo "GOOGLE_API_KEY=your_key_here" > .env
 
-Our pipeline explicitly links to the **SEPSES CVE Knowledge Graph**. The `pipeline/build_kg.py` script contains logic to detect if a vulnerability is a CVE:
+# 3. Start all services
+docker compose up --build -d
+
+# 4. Check status
+curl http://localhost:8000/
+# → {"status": "online", "total_triples": 1234}
+
+# 5. View live logs
+docker compose logs -f producer extractor graph_builder summary
+```
+
+### Access Points
+| Service | URL | Purpose |
+|---|---|---|
+| REST API | `http://localhost:8000/docs` | Swagger UI for POST /query |
+| SPARQL UI | `http://localhost:8890/sparql` | Direct Virtuoso console |
+| Reports | `./reports/daily_brief_*.md` | Auto-generated daily briefs |
+
+---
+
+## 5. Service Architecture
+
+```mermaid
+flowchart TB
+    subgraph Input[" "]
+        RSS[4 RSS Feeds]
+    end
+
+    subgraph Queue["Message Queue (Redis)"]
+        AQ[articles_queue]
+        EQ[extractions_queue]
+        SU[seen_urls SET]
+    end
+
+    subgraph Workers["Workers"]
+        PR[Producer<br/>every 5 min]
+        EX[Extractor<br/>event-driven]
+        GB[Graph Builder<br/>event-driven]
+    end
+
+    subgraph Storage["Storage"]
+        VV[(Virtuoso<br/>Named Graph)]
+    end
+
+    subgraph Output["Output"]
+        API[FastAPI<br/>Port 8000]
+        REP[Daily Report<br/>./reports/]
+    end
+
+    RSS --> PR
+    PR -->|push| AQ
+    PR -->|sadd| SU
+    AQ -->|blpop| EX
+    EX -->|push| EQ
+    EQ -->|blpop| GB
+    GB -->|SPARQL INSERT| VV
+    VV <-->|SPARQL SELECT| API
+    API -->|POST /query| SUM[Summary Worker<br/>every 24h]
+    SUM -->|write| REP
+```
+
+**All workers share the same Docker image.** `compose.yml` overrides the `command:` for each service. The queue pattern uses Redis `BLPOP` (blocking pop) so workers are event-driven and consume efficiently.
+
+---
+
+## 6. The Knowledge Graph (For Experts)
+
+### Ontology
+CSKG uses **STIX 2.1** as its primary ontology, supplemented by a custom namespace `http://group2.org/cskg/`.
+
+**Entity Types Mapped:**
+| Extracted Type | STIX Class |
+|---|---|
+| Threat Actor | `stix:ThreatActor` |
+| Malware | `stix:Malware` |
+| Vulnerability | `stix:Vulnerability` |
+| Indicator | `stix:Indicator` |
+| Attack Pattern | `stix:AttackPattern` |
+| Report | `stix:Report` |
+
+**Relationship Mapping (16 verbs):**
+```python
+RELATIONSHIP_MAP = {
+    "uses": STIX.uses,
+    "targets": STIX.targets,
+    "exploits": STIX.exploits,
+    "mitigates": STIX.mitigates,
+    "attributed_to": STIX.attributed_to,
+    "variant_of": STIX.variant_of,
+    "located_in": STIX.located_in,
+    "impersonates": STIX.impersonates,
+    "reports": STIX.reports,
+    "patched": STIX.patched,
+    "resolved": STIX.resolved,
+    "disrupted": STIX.disrupted,
+    "aligned_with": STIX.aligned_with,
+    "observes": STIX.observes,
+    "has_similarities_with": STIX.has_similarities_with,
+    "propagated_via": STIX.propagated_via,
+}
+```
+
+### Dual-URI Entity Resolution
+To handle variations in entity names (e.g., `DragonForce` vs `dragonforce`) while preserving original labels, the pipeline creates **two nodes per entity**:
+
+- **Canonical URI** (`safe_uri`): normalized, lowercase, alphanumeric only. Used for all relationships.
+- **Labeled URI** (`unsafe_uri`): preserves original text as `rdfs:label`. Linked to canonical via `owl:sameAs`.
+
+Example:
+```turtle
+cskg:dragonforce a stix:ThreatActor .
+cskg:DragonForce a stix:ThreatActor ;
+    rdfs:label "DragonForce" ;
+    owl:sameAs cskg:dragonforce .
+```
+
+### External KG Linking: SEPSES CVE
+When a vulnerability is detected as a CVE ID, the pipeline links to the **SEPSES CVE Knowledge Graph** instead of creating a local node:
 
 ```python
-# Check if the vulnerability string is a CVE
 cve_match = re.search(r"(CVE-\d{4}-\d{4,})", vuln, re.IGNORECASE)
-
 if cve_match:
-    # It's a CVE! Use the SEPSES URI.
     cve_id = cve_match.group(1).upper()
-    vuln_uri = SEPSES_CVE[cve_id]  # e.g., .../cve/CVE-2023-1234
-else:
-    # Not a CVE, use our own namespace
-    vuln_uri = safe_uri(MY_KG, vuln)
-````
+    vuln_uri = SEPSES_CVE[cve_id]  # https://w3id.org/sepses/resource/cve/CVE-XXXX-XXXX
+```
 
-This ensures that when we add a triple like `(cskg:LockBit, stix:exploits, sepses:CVE-2023-1234)`, our graph is automatically linked to the rich, external data of the SEPSES CVE graph.
+This enables queries that span both CSKG and the rich external CVE data from SEPSES.
 
-## 6\. Implementation Use Cases
+---
 
-Here are 3 example use cases for our constructed KG, with example queries.
+## 7. Querying the Graph
 
-### Use Case 1: Threat Actor Profiling
+### Via REST API
+```bash
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10"}'
+```
 
+### Via SPARQL Console
+Open `http://localhost:8890/sparql` and run queries directly against the named graph `<http://group2.org/cskg>`.
+
+### Example Use Cases
+
+#### Use Case 1: Threat Actor Profiling
 **Question:** "What malware and attack patterns does the threat actor 'Konni' use, based on recent reports?"
 
 ```sparql
-PREFIX cskg: [http://group2.org/cskg/](http://group2.org/cskg/)
-PREFIX stix: [http://docs.oasis-open.org/cti/ns/stix#](http://docs.oasis-open.org/cti/ns/stix#)
-PREFIX rdfs: [http://www.w3.org/2000/01/rdf-schema#](http://www.w3.org/2000/01/rdf-schema#)
+PREFIX cskg: <http://group2.org/cskg/>
+PREFIX stix: <http://docs.oasis-open.org/cti/ns/stix#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?malware_label ?pattern_label
 WHERE {
-  GRAPH [http://group2.org/cskg](http://group2.org/cskg) {
+  GRAPH <http://group2.org/cskg> {
     # Find the Konni threat actor
     ?actor a stix:ThreatActor ;
            rdfs:label "Konni" .
@@ -162,19 +327,18 @@ WHERE {
 }
 ```
 
-### Use Case 2: Vulnerability Impact Assessment
-
+#### Use Case 2: Vulnerability Impact Assessment
 **Question:** "We are vulnerable to 'CVE-2025-12480'. Which threat actors are actively exploiting it?"
 
 ```sparql
-PREFIX cskg: [http://group2.org/cskg/](http://group2.org/cskg/)
-PREFIX stix: [http://docs.oasis-open.org/cti/ns/stix#](http://docs.oasis-open.org/cti/ns/stix#)
-PREFIX rdfs: [http://www.w3.org/2000/01/rdf-schema#](http://www.w3.org/2000/01/rdf-schema#)
-PREFIX sepses: [https://w3id.org/sepses/resource/cve/](https://w3id.org/sepses/resource/cve/)
+PREFIX cskg: <http://group2.org/cskg/>
+PREFIX stix: <http://docs.oasis-open.org/cti/ns/stix#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sepses: <https://w3id.org/sepses/resource/cve/>
 
 SELECT DISTINCT ?actor_label
 WHERE {
-  GRAPH [http://group2.org/cskg](http://group2.org/cskg) {
+  GRAPH <http://group2.org/cskg> {
     # Find the CVE (using its linked SEPSES URI)
     BIND(sepses:CVE-2025-12480 AS ?cve)
     
@@ -188,18 +352,17 @@ WHERE {
 }
 ```
 
-### Use Case 3: Incident Response & Triage
-
+#### Use Case 3: Incident Response & Triage
 **Question:** "We found the indicator 'GlassWorm' in our logs. What is it, and what reports mention it?"
 
 ```sparql
-PREFIX cskg: [http://group2.org/cskg/](http://group2.org/cskg/)
-PREFIX stix: [http://docs.oasis-open.org/cti/ns/stix#](http://docs.oasis-open.org/cti/ns/stix#)
-PREFIX rdfs: [http://www.w3.org/2000/01/rdf-schema#](http://www.w3.org/2000/01/rdf-schema#)
+PREFIX cskg: <http://group2.org/cskg/>
+PREFIX stix: <http://docs.oasis-open.org/cti/ns/stix#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?entity_label ?entity_type ?report_url
 WHERE {
-  GRAPH [http://group2.org/cskg](http://group2.org/cskg) {
+  GRAPH <http://group2.org/cskg> {
     # Find the entity by its label
     ?entity rdfs:label "GlassWorm" ;
             a ?entity_type ;
@@ -218,69 +381,64 @@ WHERE {
 }
 ```
 
-## 7\. Constructed KG (RDF/Turtle File)
+---
 
-The pipeline writes data *live* to the Virtuoso database.
+## 8. Daily Intelligence Reports
 
-To get a full dump of the *live* graph from the system, you can run the provided dump script from your local machine:
+The **summary worker** (`graph_eval_worker.py`) runs every 24 hours. It queries the graph for all active threat actors, their malware, and targets, then generates a **Strategic Threat Landscape Assessment** using Gemini.
 
+**Output:** Markdown reports saved to `./reports/daily_brief_YYYY-MM-DD.md`.
+
+Typical report structure:
+1. **Executive Summary** — Key trends observed
+2. **Key Threat Actors** — Active groups and their capabilities
+3. **Tooling Trends** — Most frequently observed malware / techniques
+4. **Strategic Assessment** — Implications for defense
+5. **Recommendations** — Actionable mitigations
+
+**To see the latest report:**
+```bash
+ls -lt reports/daily_brief_*.md | head -1
+```
+
+---
+
+## 9. Architecture Notes
+
+### Why Redis Queues?
+Instead of direct HTTP calls between services, we use Redis `LIST`s with `BLPOP` for loose coupling. This means:
+- Workers can crash and restart without losing jobs.
+- The `producer` and `extractor` run at different speeds without blocking each other.
+- New worker instances can be scaled horizontally by running more extractors/builders.
+
+### Why STIX?
+STIX (Structured Threat Information Expression) is the industry-standard threat intelligence ontology. By mapping our LLM extractions directly to STIX classes, our graph is immediately compatible with existing TI tools (MISP, OpenCTI, TAXII servers).
+
+### Shared Docker Image
+All Python services share one Dockerfile. `compose.yml` selects which module to run via `command:`. This keeps image size small and makes local development simple — just change a file and restart the service.
+
+### Database Initialization
+On first startup, Virtuoso runs `pipeline/virtuoso-scripts/init.sql` automatically to grant `SPARQL_FED`, `SPARQL_UPDATE`, and read/write permissions on the named graph `http://group2.org/cskg`.
+
+---
+
+## 10. Export & Backup
+
+### Dump the Full Graph
+Run from your host machine (not inside Docker):
 ```bash
 python server/cskg_dump.py
 ```
+This saves `cskg_full_dump.ttl` — a complete Turtle dump of the live graph.
 
-This will connect to the running Virtuoso instance and save the full Knowledge Graph as a `.ttl` file in your current directory.
+### Load a Dump into Virtuoso
+You can load a `.ttl` file via the Virtuoso SQL console at `http://localhost:8890/conductor` or via `isql`:
+```sql
+DB.DBA.TTLP(file_to_string_output('/path/to/cskg_full_dump.ttl'), '', 'http://group2.org/cskg', 0);
+```
 
-## 8\. How to Run
+---
 
-1.  **Clone the repository:**
+## License
 
-    ```bash
-    git clone <your-repo-url>
-    cd <your-repo-name>
-    ```
-
-2.  **Create `.env` file:**
-    This project requires a Google API key for the extractor.
-
-    ```bash
-    # Copy the example .env file
-    # (Note: You'll need to create a .env.example if it's not there)
-    # Create a new file named .env
-    nano .env
-    ```
-
-    Add your API key to the `.env` file:
-
-    ```
-    GOOGLE_API_KEY=YOUR_API_KEY_HERE
-    ```
-
-3.  **Build and Run with Docker Compose:**
-
-    ```bash
-    docker compose up --build -d
-    ```
-
-      * `--build`: Forces Docker to rebuild the image (useful if you change code).
-      * `-d`: Runs in detached mode.
-
-4.  **Access the Services:**
-
-      * **CSKG API:** `http://localhost:8000/docs`
-      * **Virtuoso SPARQL UI:** `http://localhost:8890/sparql`
-      * **Redis (e.g., with RedisInsight):** `redis://localhost:6379`
-
-5.  **View Logs:**
-    To see the pipeline in action, you can stream the logs:
-
-    ```bash
-    # See all services
-    docker compose logs -f
-
-    # See just the extractor, builder, and summary worker
-    docker compose logs -f extractor graph_builder summary
-    ```
-
-## 9\. GitHub Source
-
-The full source code for this project is available in this repository.
+MIT
