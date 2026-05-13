@@ -208,7 +208,8 @@ flowchart TB
     EQ -->|blpop| GB
     GB -->|SPARQL INSERT| VV
     VV <-->|SPARQL SELECT| API
-    API -->|POST /query| SUM[Summary Worker<br/>every 24h]
+    SUM[Summary Worker<br/>every 24h]
+    API -->|POST /query| SUM
     SUM -->|write| REP
 ```
 
