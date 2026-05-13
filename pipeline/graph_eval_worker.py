@@ -58,22 +58,19 @@ def get_high_priority_threats():
     PREFIX stix: <http://docs.oasis-open.org/cti/ns/stix#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-    SELECT ?actor_label (GROUP_CONCAT(DISTINCT ?malware_label; separator=", ") AS ?tools)
+    SELECT ?actor_label 
+           (GROUP_CONCAT(DISTINCT ?malware_label; separator=", ") AS ?tools)
+           (GROUP_CONCAT(DISTINCT ?target_label; separator=", ") AS ?targets)
     WHERE {
       GRAPH <http://group2.org/cskg> {
-        # Find Threat Actors
         ?actor a stix:ThreatActor ;
                rdfs:label ?actor_label .
         
-        # Find Malware they use
-        OPTIONAL {
-            ?actor stix:uses ?malware .
-            ?malware rdfs:label ?malware_label .
-        }
+        OPTIONAL { ?actor stix:uses ?malware . ?malware rdfs:label ?malware_label . }
+        OPTIONAL { ?actor stix:targets ?target . ?target rdfs:label ?target_label . }
       }
     }
     GROUP BY ?actor_label
-    ORDER BY ?actor_label
     """
     try:
         response = requests.post(QUERY_ENDPOINT, json={"query": sparql_query})
