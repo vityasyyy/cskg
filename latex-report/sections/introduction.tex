@@ -1,0 +1,17 @@
+\section{Introduction}
+
+Cybersecurity Knowledge Graphs (CSKGs) play a crucial role in supporting threat analysis, incident investigation, and data-driven decision-making in modern security operations. By representing relationships among key cybersecurity entities—such as malware, threat actors, vulnerabilities, attack techniques, and infrastructures—CSKGs enable integrated reasoning across diverse sources of threat intelligence. However, existing CSKG construction efforts predominantly rely on structured data sources, including standardized repositories such as CVE, CAPEC, and ATT\&CK. While these sources are well-organized and machine-readable, they capture only a portion of the rapidly evolving cybersecurity landscape.
+
+In practice, most threat intelligence emerges first in the form of unstructured Cyber Threat Intelligence (CTI), such as incident reports, security blogposts, technical analyses, advisories, and threat-hunting articles. These unstructured artifacts contain rich contextual information—details about attacker behavior, evolving tactics, newly observed indicators, and deep narrative insights that are often missing from structured datasets. However, their unstructured nature makes automated extraction and integration into CSKGs significantly challenging. The variability of writing styles, domain-specific terminology, and implicit relationships within free text creates a substantial gap between the available intelligence in the field and what current CSKG systems are capable of capturing.
+
+This project aims to address this gap by focusing on the construction of a CSKG from unstructured CTI sources. Leveraging techniques from Machine Learning, Large Language Models (LLMs), and semantic mapping frameworks, the project seeks to extract cybersecurity entities and relations from textual data and align them with existing cybersecurity ontologies. The primary contributions of this work are as follows:
+
+\begin{enumerate}
+    \item Identification and curation of multiple types of unstructured CTI sources relevant to cyber threat analysis.
+    \item Development of an automated pipeline for entity extraction, normalization, and CSKG construction.
+    \item Ontology-based semantic mapping to ensure consistency and interoperability with existing CSKGs.
+    \item Evaluation of the constructed graph, including statistical analysis and identification of missing or erroneous elements.
+    \item Demonstration of real-world use cases, such as threat hunting, indicator enrichment, and exploration of attack patterns.
+\end{enumerate}
+
+By transforming unstructured CTI into a coherent and interconnected knowledge graph, this project aims to produce a more comprehensive and adaptive representation of cybersecurity knowledge—one that reflects current threat dynamics and supports more effective analytical and operational workflows.

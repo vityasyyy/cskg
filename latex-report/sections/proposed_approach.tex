@@ -1,0 +1,55 @@
+\section{Proposed Approach}
+The conceptual framework implements an automated, event-driven pipeline to construct a \textbf{Cybersecurity Knowledge Graph (CSKG)} from diverse unstructured data sources. This method addresses the challenge of synthesizing actionable threat intelligence by employing a \textbf{Large Language Model (LLM)} for efficient Information Extraction (IE) and mapping the results to a formal, extensible cybersecurity ontology. The resulting graph is persisted in a \textbf{Virtuoso SPARQL endpoint} for complex, semantic querying.
+
+\subsection{Unstructured Source Landscape}
+Sources were strategically selected to ensure comprehensive coverage, integrating \textbf{real-time indicators} with \textbf{in-depth technical analysis}. This variety minimizes the blind spots inherent in relying on singular data streams.
+
+\begin{table}[h]
+\centering
+\caption{Selected Unstructured Data Sources and Justification}
+\label{tab:sources}
+% Modified table: 'l' for Category, 'p{6cm}' for justification to force wrapping.
+\begin{tabular}{l p{7cm}} 
+\toprule
+\textbf{Category} & \textbf{Justification} \\
+\midrule
+Security News Blogs (RSS) & Provides high velocity, continuous updates on emerging threats and vulnerabilities. \\
+Vendor Attack Reports & Offers validated, in-depth technical analysis (often in semi-structured PDF/blog format) of adversarial campaigns. \\
+CVE Descriptions (NVD) & Supplies authoritative, standardized textual details crucial for vulnerability mapping. \\
+Threat Intel Tweets & Captures real-time, often leading-edge, short-form indicators from researcher communities. \\
+Malware Analysis Reports & Delivers crucial technical breakdowns of malicious software behavior and internal structure. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Ontology Strategy}
+A \textbf{hybrid ontology} model is utilized to ensure semantic rigor while allowing for domain-specific extension.
+
+\begin{itemize}
+    \item \textbf{Reused Ontology:} \textbf{STIX 2.1} is adopted as the primary semantic model, providing standardized classes (e.g., \texttt{STIX:ThreatActor}, \texttt{STIX:Malware}) and relationship types.
+    \item \textbf{Reused Modules:} Explicit \textbf{cross-KG linking} targets the \textbf{SEPSES CVE Knowledge Graph}. Recognized CVE identifiers are mapped directly to their established SEPSES URIs.
+    \item \textbf{Custom Namespace:} The namespace \texttt{http://group2.org/cskg/} (prefix \texttt{cskg}) is used for the named graph persistence and for custom entities lacking a direct STIX equivalent.
+    \item \textbf{Alignment:} A critical \textbf{\texttt{RELATIONSHIP\_MAP}} bridges LLM output (plain-English verbs) and formal, constrained \textbf{STIX relationship properties} (\texttt{STIX:uses}), ensuring ontological consistency.
+\end{itemize}
+
+\subsection{End-to-End Pipeline}
+The architecture is a microservice-based, event-driven pipeline orchestrated via Docker Compose and \textbf{Redis} messaging queues.
+
+\begin{table}[h]
+\centering
+\caption{CSKG Pipeline Stages and Key Technologies}
+\label{tab:pipeline}
+
+\begin{tabular}{l p{3cm} p{6cm}} 
+\toprule
+\textbf{Stage} & \textbf{Component} & \textbf{Key Technology/Function} \\
+\midrule
+Collection & \texttt{producer} (\texttt{scraper.py}) & Scrapes and normalizes input data (RSS feeds). \\
+Preprocessing & \texttt{producer} / \textbf{Redis} & Filters duplicates using a \texttt{seen\_urls} set. \\
+Information Extraction (IE) & \texttt{extractor} & \textbf{LLM Prompting} (Google \textbf{Gemini} via \textbf{LangChain}). \\
+Triple Generation & \texttt{graph\_builder} & \textbf{rdflib} transforms JSON to RDF; maps to STIX/custom ontology. \\
+Entity Alignment & \texttt{graph\_builder} (Logic) & Maps recognized CVEs to external \textbf{SEPSES URIs}. \\
+Validation/Storage & \textbf{Virtuoso} & Persistence via SPARQL \texttt{INSERT DATA} queries. \\
+\bottomrule
+\end{tabular}
+\end{table}

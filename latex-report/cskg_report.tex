@@ -1,0 +1,53 @@
+% Cybersecurity Knowledge Graph report template derived from samplepaper.tex
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+
+\begin{document}
+
+\title{Constructing Cybersecurity Knowledge Graphs from Unstructured Intelligence}
+\titlerunning{CSKG from Unstructured Intelligence}
+
+\author{Andrian Danar Perdana \and
+Muhammad Argya Vityasy\and
+Muhammad Bagas Prayoga \and
+Rayhan Firdaus Ardian \and
+Sultan Devino Suyudi}
+
+
+\institute{Universitas Gadjah Mada, Department of Computer Science and Electronics, Yogyakarta, Indonesia}
+\maketitle
+
+\begin{abstract}
+This project presents an automated pipeline for constructing a Cybersecurity Knowledge Graph (CSKG) specifically derived from unstructured Cyber Threat Intelligence (CTI). Addressing the limitations of current graphs that rely on structured feeds, this system ingests data from five critical unstructured source types: Security News Blogs (RSS), Vendor Attack Reports, CVE Descriptions, Threat Intel Tweets, and Malware Analysis Reports. The architecture employs an event-driven microservice framework utilizing Redis for messaging and a Google Gemini Large Language Model (LLM) orchestrated via LangChain for high-fidelity Information Extraction (IE).
+
+
+
+For semantic integration, the system adopts a hybrid ontology model, mapping extracted entities to the industry-standard STIX 2.1 schema while maintaining a custom namespace for flexibility. A key feature is the automated cross-linking of vulnerabilities to the external SEPSES CVE Knowledge Graph. Instead of RML mappings, the pipeline utilizes custom Python scripts with rdflib to transform validated extraction data into RDF triples persisted in a Virtuoso SPARQL endpoint. The demonstrates its utility through three representative use cases: Attack Surface Monitoring, Incident Response Triage, and Vulnerability Intelligence Linking.
+\keywords{Cybersecurity knowledge graph \and Unstructured data \and Semantic web \and Ontology alignment \and Threat intelligence}
+\end{abstract}
+
+\input{sections/introduction}
+
+\input{sections/related_work}
+
+\input{sections/proposed_approach}
+
+\input{sections/implementation}
+
+\input{sections/use_cases}
+
+
+\input{sections/conclusion}
+
+\input{sections/appendix}
+
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\end{document}

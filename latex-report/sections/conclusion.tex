@@ -1,0 +1,29 @@
+\section{Conclusion}
+
+This work successfully designed and implemented an automated pipeline for constructing a \textbf{Cybersecurity Knowledge Graph (CSKG)} from unstructured threat intelligence sources.
+
+\subsection{Achievements}
+The primary achievement is the fully operational, event-driven data pipeline, integrating multiple microservices (scraper, extractor, builder) using Redis as a message bus. This system successfully:
+\begin{itemize}
+    \item Established continuous ingestion of unstructured text from dynamic sources (e.g., RSS feeds).
+    \item Utilized a \textbf{Google Gemini LLM} via \texttt{LangChain} to perform high-fidelity entity and relationship extraction.
+    \item Persisted the extracted semantic data in a \textbf{Virtuoso SPARQL endpoint}, conforming to the RDF data model.
+    \item Demonstrated semantic querying capability via a dedicated \texttt{FastAPI} interface.
+\end{itemize}
+
+\subsection{Contributions}
+The core contributions advance automated CSKG construction by:
+\begin{itemize}
+    \item Proposing a \textbf{hybrid ontology approach}, mapping LLM output directly to the industry-standard \textbf{STIX 2.1} while preserving flexibility via a custom namespace.
+    \item Implementing a critical \textbf{cross-KG linking layer} that automatically integrates discovered CVEs with the external \textbf{SEPSES CVE Knowledge Graph}, significantly enriching the threat context.
+    \item Validating a methodology for generating structured triples from noisy, heterogeneous cybersecurity text with high scalability potential.
+\end{itemize}
+
+\subsection{Future Work}
+Future efforts will focus on enhancing the depth and breadth of the CSKG:
+\begin{itemize}
+    \item \textbf{Wider Data Coverage:} Expanding source collection to include PDF reports, social media scraping, and deep web forums.
+    \item \textbf{Entity Resolution:} Implementing a robust entity disambiguation layer to merge nodes (e.g., \texttt{APT29} and \texttt{APT 29}) and improve graph coherence.
+    \item \textbf{Multilingual Support:} Extending the LLM extraction prompts and processing to natively support non-English threat reports.
+    \item \textbf{Temporal Analysis:} Incorporating time series data and temporal reasoning into the graph model to track threat evolution.
+\end{itemize}

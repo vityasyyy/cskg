@@ -1,0 +1,32 @@
+\section{Implementation}
+
+The pipeline was realized as an event-driven, microservice architecture, orchestrated via \textbf{\texttt{docker-compose.yml}}. The entire system is modular, using a \textbf{Redis} instance as the central message bus for queuing articles and extractions.
+
+\subsection{Data Acquisition and Normalization}
+Data acquisition is handled by the \texttt{producer} component (\texttt{pipeline/scraper.py}), implemented in Python.
+
+\begin{itemize}
+    \item \textbf{Crawlers/APIs:} The primary acquisition method involves scraping \textbf{RSS feeds} from high-volume security news providers (e.g., TheHackerNews, BleepingComputer). This establishes a continuous, low-latency source ingestion.
+    \item \textbf{Cleansing Steps:} A crucial normalization step involves \textbf{duplicate checking}. The \texttt{producer} utilizes a Redis \texttt{set} (\texttt{seen\_urls}) to store hashes of processed URLs, preventing redundant ingestion and processing of previously seen content.
+    \item \textbf{Language Detection:} Implicitly handled by focusing initial scraping on known English-language threat intelligence blogs; no explicit language model is run.
+\end{itemize}
+
+\subsection{Information Extraction Components}
+Extraction is performed by the \texttt{extractor} worker, which listens to the Redis queue for new articles.
+
+\begin{itemize}
+    \item \textbf{Extraction Tooling:} The core of the IE component is a \textbf{LangChain} pipeline leveraging a \textbf{Google Gemini LLM}.
+    \item \textbf{Template Prompts:} The LLM is supplied with structured prompts designed to guide output toward specific cyber entities (\texttt{ThreatActor}, \texttt{Malware}, \texttt{Vulnerability}) and their directed relationships (e.g., \texttt{uses}, \texttt{targets}).
+    \item \textbf{RDF Generation and Relation Extraction:} \textbf{Relation Extraction (RE)} and \textbf{Named Entity Recognition (NER)} are performed simultaneously by the LLM, which outputs a single JSON object structured according to \textbf{Pydantic schemas}.
+    \item \textbf{Confidence Handling:} Explicit numerical confidence scores are \textbf{not} generated. Instead, reliability is managed through the use of strict \textbf{Pydantic output parsers}, which reject malformed or hallucinated outputs that do not conform to the predefined entity/relationship schema.
+\end{itemize}
+
+\subsection{Knowledge Graph Construction}
+The \texttt{graph\_builder} worker handles the semantic transformation and persistence of the structured extractions.
+
+\begin{itemize}
+    \item \textbf{RDF Generation:} RDF triples are generated using a custom Python script (\texttt{pipeline/build\_kg.py}) utilizing the \textbf{\texttt{rdflib}} library. This logic explicitly transforms the Pydantic-validated JSON into triples, rather than relying on RML mappings.
+    \item \textbf{Namespace Conventions:} The primary namespace for classes and predicates is the industry-standard \textbf{STIX 2.1}. A custom namespace, \texttt{http://group2.org/cskg/}, is employed for the specific named graph and any entities lacking direct STIX classification.
+    \item \textbf{SEPSES Entity Linking:} A key feature is the entity alignment logic within \texttt{build\_kg.py} that detects CVE identifiers and maps them to pre-defined \textbf{SEPSES CVE URIs}, facilitating external KG linkage.
+    \item \textbf{SPARQL Endpoint Deployment:} The persistent store is an \textbf{OpenLink Virtuoso} container. Triples are committed live using \textbf{SPARQL \texttt{INSERT DATA}} queries, ensuring a continuously updating knowledge graph.
+\end{itemize}

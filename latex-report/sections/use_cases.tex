@@ -1,0 +1,32 @@
+\section{Use-Case Applications}
+
+The constructed CSKG provides a semantic layer over unstructured threat intelligence, enabling complex, graph-based queries that accelerate defensive operations. We present three real-world application scenarios.
+
+\subsection{Use-Case 1: Attack Surface Monitoring}
+The CSKG accelerates proactive monitoring by tracing newly disclosed adversarial tactics (\texttt{STIX:AttackPattern} or \texttt{STIX:Malware}) back to vulnerable assets within an organization's inventory.
+
+\begin{itemize}
+    \item \textbf{Process:} An analyst queries the KG to find all \texttt{STIX:AttackPattern} nodes that are related to a newly observed technique (e.g., using \texttt{stix:uses} or \texttt{stix:exploits}) a specific \texttt{STIX:Vulnerability}.
+    \item \textbf{Value:} By linking the vulnerability node (which is often linked externally to the \textbf{SEPSES CVE KG}) to internal asset management data, the organization can immediately identify and prioritize assets directly exposed to the latest tactics.
+\end{itemize}
+
+\subsection{Use-Case 2: Incident Response Triage}
+During incident triage, the CSKG significantly reduces the Mean Time To Contain (MTTC) by providing instantaneous context to discovered indicators.
+
+\begin{itemize}
+    \item \textbf{Process:} A security appliance logs a suspicious artifact (e.g., an IP address, file hash), which is mapped to a \texttt{STIX:Indicator} node in the graph. The analyst queries outward from this node.
+    \item \textbf{Acceleration:} The KG instantly resolves the Indicator to its associated \texttt{STIX:Malware}, the responsible \texttt{STIX:ThreatActor}, and the primary \texttt{STIX:Report} (source article). This single query provides the full contextual profile needed to inform immediate containment and eradication strategies (e.g., IoC blocking, behavior hunting).
+\end{itemize}
+
+\subsection{Use-Case 3: Vulnerability Intelligence Linking}
+The graph structure facilitates automated linking of disparate intelligence elements related to a single zero-day or vulnerability bulletin.
+
+\begin{itemize}
+    \item \textbf{Process:} When a \texttt{STIX:Vulnerability} (identified by its CVE ID and linked to SEPSES) is registered, the KG connects it to:
+    \begin{enumerate}
+        \item Threat actors/malware observed to actively exploit it (\texttt{stix:exploits}).
+        \item Indicators associated with that exploitation (\texttt{stix:indicator}).
+        \item Mitigation steps mentioned in the source \texttt{STIX:Report} or related documents.
+    \end{enumerate}
+    \item \textbf{Integration:} This connectivity allows vulnerability management systems to ingest a cohesive profile linking risk, exploitation evidence, and appropriate defensive actions from a single semantic source.
+\end{itemize}
