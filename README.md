@@ -152,15 +152,28 @@ cd <repo-name>
 echo "GOOGLE_API_KEY=your_key_here" > .env
 
 # 3. Start all services
-docker compose up --build -d
+make up
+# or: docker compose up --build -d
 
 # 4. Check status
-curl http://localhost:8000/
+make status
 # → {"status": "online", "total_triples": 1234}
 
 # 5. View live logs
-docker compose logs -f producer extractor graph_builder summary
+make logs
 ```
+
+### Convenience Targets
+| Command | What it does |
+|---|---|
+| `make up` | Build and start all services |
+| `make down` | Stop all services |
+| `make logs` | Follow worker logs |
+| `make status` | Health check on the API |
+| `make report` | Build the LaTeX report |
+| `make report-clean` | Remove LaTeX build artifacts |
+| `make dump` | Export the full graph to `cskg_full_dump.ttl` |
+| `make clean` | Remove build artifacts and dump |
 
 ### Access Points
 | Service | URL | Purpose |
@@ -426,11 +439,11 @@ On first startup, Virtuoso runs `pipeline/virtuoso-scripts/init.sql` automatical
 ## 10. Export & Backup
 
 ### Dump the Full Graph
-Run from your host machine (not inside Docker):
 ```bash
-python server/cskg_dump.py
+make dump
+# or: python3 server/cskg_dump.py
 ```
-This saves `cskg_full_dump.ttl` — a complete Turtle dump of the live graph.
+This saves `cskg_full_dump.ttl` — a complete Turtle dump of the live graph. The dump file is gitignored; rebuild it anytime from a running Virtuoso instance.
 
 ### Load a Dump into Virtuoso
 You can load a `.ttl` file via the Virtuoso SQL console at `http://localhost:8890/conductor` or via `isql`:
