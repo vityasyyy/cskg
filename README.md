@@ -442,4 +442,4 @@ DB.DBA.TTLP(file_to_string_output('/path/to/cskg_full_dump.ttl'), '', 'http://gr
 
 ## License
 
-MIT
+Apache-2.0 License
